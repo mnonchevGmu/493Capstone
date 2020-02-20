@@ -106,7 +106,7 @@
                 </div>
                
                 <div class="links">
-                    <a href= "{{ url('/newCustomer') }}">New Customer</a>
+                    <a href= "{{!! url('/newCustomer'); !!}}">New Customer</a>
                     <a href='/returningCustomer.html'>Returning Customer</a>
       
                 </div>

@@ -106,8 +106,8 @@
                 </div>
                
                 <div class="links">
-                    <a href= '/newCustomer'>New Customer</a>
-                    <a href='/returningCustomer'>Returning Customer</a>
+                    <a href= '/newCustomer.html'>New Customer</a>
+                    <a href='/returningCustomer.html'>Returning Customer</a>
       
                 </div>
             </div>

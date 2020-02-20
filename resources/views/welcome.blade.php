@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <h1>Welcome to Skydive Orange</h1> 
+                    Welcome to Skydive Orange 
                     <br> 
                 </div>
 

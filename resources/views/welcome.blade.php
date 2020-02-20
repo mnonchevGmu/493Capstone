@@ -106,7 +106,7 @@
                 </div>
                
                 <div class="links">
-                    <a href= 'views/newCustomer'>New Customer</a>
+                    <a href= "newCustomer.html">New Customer</a>
                     <a href='/returningCustomer'>Returning Customer</a>
       
                 </div>

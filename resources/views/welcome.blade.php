@@ -81,9 +81,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Welcome to Skydive Orange 
-                    <br><br>
-                    Please Check In Here 
+                    <h1>Welcome to Skydive Orange</h1> 
+                    <br> 
                 </div>
 
                 <div class="links">

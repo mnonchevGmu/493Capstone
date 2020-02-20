@@ -84,11 +84,13 @@
                     Welcome to Skydive Orange
                     <hr>  
                 </div>
-
+               
                 <div class="links">
-                    <a href="newCustomer.php">New Customer</a>
-                    <a href="returningCustomer.php">Returning Customer</a>
 
+                <?php
+                    include <a href="newCustomer.php">New Customer</a>
+                    include <a href="returningCustomer.php">Returning Customer</a>
+                ?>
                 </div>
             </div>
         </div>

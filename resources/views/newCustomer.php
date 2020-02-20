@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>New Customer</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -81,13 +81,12 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Welcome to Skydive Orange
-                    <hr>  
+                    New customer form input  
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">New Customer</a>
-                    <a href="https://laracasts.com">Returning Customer</a>
+                    <a href="newCustomer.php">New Customer</a>
+                    <a href="returningCustomer.php">Returning Customer</a>
 
                 </div>
             </div>

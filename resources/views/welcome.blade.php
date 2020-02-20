@@ -81,7 +81,9 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel 
+                    Welcome to Skydive Orange 
+                    <br><br>
+                    Please Check In Here 
                 </div>
 
                 <div class="links">

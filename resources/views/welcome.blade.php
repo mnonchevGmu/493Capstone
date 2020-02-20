@@ -106,8 +106,8 @@
                 </div>
                
                 <div class="links">
-                    <a href="newCustomer.blade.php">New Customer</a>
-                    <a href="returningCustomer.blade.php">Returning Customer</a>
+                    <a href='/newCustomer'>New Customer</a>
+                    <a href='/returningCustomer'>Returning Customer</a>
       
                 </div>
             </div>

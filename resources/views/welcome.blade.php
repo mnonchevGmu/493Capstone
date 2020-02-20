@@ -80,32 +80,6 @@
     /* Set the font-size to 25 pixels */
     font-size: 50px;
   }
-
-   /* Position text in the top-left corner */
-   .topleft {
-    position: absolute;
-    top: 0;
-    left: 16px;
-  }
-  
-  /* Position text in the bottom-left corner */
-  .bottomleft {
-    position: absolute;
-    bottom: 0;
-    left: 16px;
-    font-size: 25px;
-  }
-
-  .blankarea {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    background-color: rgba(101, 100, 100, 0.4);
-  }
   
         </style>
     </head>
@@ -134,27 +108,6 @@
                 <div class="links">
                     <a href="newCustomer.html">New Customer</a>
                     <a href="returningCustomer.html">Returning Customer</a>
-
-                   
-                    <div class="bgimg">
-    <div class="blankarea ">
-        <div class="topleft">
-            <img src = "SOI Logo100x100.png" alt = "Skydive Orange Logo" 
-            style="margin: 15px 15px 15px 15px">
-        </div>
-        
-        <!---
-        <div class="middle">
-            <h1>Welcome</h1>
-            <hr>
-            <a href = "index.html">Check In Here</a>
-        </div>
-      -->
-        <div class="bottomleft">
-          <p>Toggle spanish?</p>
-        </div>
-      </div>
-      </div>
       
                 </div>
             </div>

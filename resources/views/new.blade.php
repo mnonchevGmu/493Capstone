@@ -8,7 +8,7 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<link rel="stylesheet" href="projectStyles.css">
+<link rel="stylesheet" type="text/css" href="{{ url('/css/projectStyles.css') }}" />
 
 <script type="text/javascript" src='scripts.js'>
 </script>
@@ -39,21 +39,26 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
 
 <body>
 
-<!--Placement of logo-->
+<!--Placement of logo
 <div class="topleft">
-    <a href = "welcome.html">
-        <img src = "SOI Logo100x100.png" alt = "Skydive Orange Logo" 
+    <a href = '/welcome'>
+        <img src = "/images/SOI Logo100x100.png" alt = "Skydive Orange Logo"
             style="margin: 15px 15px 15px 15px">
     </a>
 </div>
-
+-->
 <!--Beginning of the main content where the user is asked to enter info on a form-->
 <div class="row">
     <div class="col-md-8 col1color">
         <div class="container mt-4">
-            <p id="top">If you made a skydive with us and purchased video and/or photos, please
-                fill out the form below so that we may send you the correct media!
-                Please allow up to 24 hours for us to send you your media.<br><br>
+            <div class = "topleft">
+                <a href = '/welcome'>
+                    <img src = "/images/SOI Logo100x100.png" alt = "Skydive Orange Logo"
+                        style = "margin: 15px 15px 15px 15px">
+                </a>
+            </div>
+            <p id="top">Please fill out the form below and read the terms and Conditions
+                of your media purchase.<br><br>
             </p>
         </div>
 
@@ -79,10 +84,10 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                 <!--Get the customer's email address and ask to re-type email-->
                 <fieldset class="email-border border border-dark rounded p-3 mb-4">
                     <legend class="email-border">Email Address</legend>
-                    <label for="customerEmail1">Email address</label>
+                    <label for="customerEmail1">Email Address</label>
                     <input type="email" class="form-control mb-3" id="customerEmail1" required
                         placeholder="email@domain.com">
-                    <label for="customerEmail2">Re-type Email address</label>
+                    <label for="customerEmail2">Re-type Email Address</label>
                     <input type="email" class="form-control " id="customerEmail2" required
                         placeholder="email@domain.com">
                     <small id="email2Tip" class="form-text text-muted ml-3">Both email addresses must
@@ -100,14 +105,13 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
 
                 </div>
 
-                <p>Please select the media that you purchased so we may search for it in
-                    the correct directory.
+                <p>Please select the media that you would like to purchase today.
                 </p>
 
                 <!--Get customer to select which media they wanted-->
                 
                 <!--Change from select class to selectmenu with jquery UI-->
-                <!--
+                
                 <div class="form-group">
                     <label for="customerMediaSelection">Media Selection</label>
                     <select class="form-control" id="customerMediaSelection">
@@ -124,17 +128,18 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                             
                     </select>
                 </div><br>
-                -->
-
+                
+            <!--Taken out
                 <div class = "form-group ui-widget">
                     <label for="customerMediaSelection">Media Selection (start with AFF or Tandem)</label>
                     <input id = "customerMediaSelection" class = "form-control">
                 </div>
+            -->
 
                 <!--Get customer to select if they wanted to upgrade or not-->
                 <div class="form-row">
                     <fieldset class="mediaType-border border border-dark rounded p-3 mb-4">
-                        <legend class="mediaType-border">Do you want to upgrade?</legend>
+                        <legend class="mediaType-border">Terms and Acknowledgement</legend>
                         <p>If you purchased "Video only" or "Photos only", would you like to upgrade
                             to receive both video and photos? If yes, a customer service
                             representative will reach out within 24 hours to assist you.
@@ -145,7 +150,7 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                             <input class="form-check-input" type="radio" name="mediaTypeRadio"
                                 id="mediaTypeRadio1" value="yes">
                             <label class="form-check-label" for="mediaTypeRadio1">
-                                Yes
+                                I acknowledge
                             </label>
                         </div>
 
@@ -153,7 +158,7 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                             <input class="form-check-input" type="radio" name="mediaTypeRadio"
                                 id="mediaTypeRadio2" value="no" checked>
                             <label class="form-check-label" for="mediaTypeRadio2">
-                                No
+                                I do not acknowledge
                             </label>
                         </div>
                     </fieldset>
@@ -168,18 +173,21 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" value="cloud" id="cloudCheck">
                             <label class="form-check-label pr-5 pl-1" for="cloudCheck">
-                                Upload to cloud
+                                I understand that my media can take up to 48 hours to complete
                             </label>
 
+                            <!--Needs to be dependent on user selecting no to terms-->
                             <input class="form-check-input" type="checkbox" value="usb" id="usbCheck">
                             <label class="form-check-label pr-5 pl-1" for="usbCheck">
-                                Mailed USB
+                                (Dependendent)I understand that I will need to purchase a USB drive to obtain my media
                             </label>
 
+                            <!--Taken out
                             <input class="form-check-input" type="checkbox" value="dvd" id="dvdCheck">
                             <label class="form-check-label pr-5 pl-1" for="dvdCheck">
                                 Mailed DVD
                             </label>
+                            -->
                         </div>
 
                     </div>
@@ -187,12 +195,14 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                 </fieldset>
 
                 <!--Text area provided for customer to enter additional info-->
+                <!--Taken out
                 <div class="form-group">
                     <p>Please provide additional details below to assist us in fulfilling your
                         request.</p>
                     <label for="additionalInformation">Additional Details</label>
                     <textarea class="form-control" id="additionalInformation" rows="3" required></textarea>
                 </div>
+                -->
             </form>
         </div>
 
@@ -245,8 +255,8 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
         <div class="border border-dark rounded p-3 mb-4">
             <p> <span class="InitLetterBold pr-3">Q:</span> What if I don't want my video on Youtube?</p>
 
-            <p> <span class="InitLetterBold pr-3">A:</span> Please select the checkbox below to indicate
-                that you do not want your video on Youtube, and we would be happy to give you a USB. Please 
+            <p> <span class="InitLetterBold pr-3">A:</span> Please select the option within the form to indicate
+                that you do not accept the terms of the agreement, and we would be happy to give you a USB. Please 
                 note that there is an additional cost of $5 for the USB. </p>
                 
                 <!--Button to activate the "Raw ajax" code created-->
@@ -266,9 +276,12 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
 <!--Container for the footer-->
 <div class="navbar navbar-expand-sm navbar-default navbar-fixed-bottom" id="footerBar">
     <div class="container">
+
+    <!--Taken out
         <div class="col-md-6">
             <p><em>Disclaimer: This website is developed as an educational project.</em></p>
         </div>
+    -->
     </div>
 </div>
 </div>

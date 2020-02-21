@@ -20,13 +20,16 @@
     <body>
         <div class="flex-center position-ref full-height">
 
-        <!--Added today
+        <!--Added todayEnd of today's addition-->
             <div class="bgimg">
-                <div class="blankarea ">
-                    background-image: url("welcomeBackground.jpg");
+                <div class="blankarea">
+
+                    <div style = "background-image: url('/images/welcomeBackground.jpg');">
+                    </div>
+    
                 </div>
             </div>
-    End of today's addition-->
+    
         <!--
             @if (Route::has('login'))
                 <div class="top-right links">

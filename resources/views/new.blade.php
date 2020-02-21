@@ -94,20 +94,23 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                         match</small>
                 </fieldset>
 
-
+                <fieldset class="email-border border border-dark rounded p-3 mb-4">
+                    <legend class="email-border">Skydive and Media Information</legend>
                 <div class="form-row">
 
                     <!--Get customer to select their jump date-->
+                    
                     <div class="form-group col-md-6">
                         <label class="mr-2" for="customerJumpDate">Date of Skydive</label>
                        <input type="date" class="form-control" id="customerJumpDate">
                     </div>
 
                 </div>
-
+                
+                <!--Taken out
                 <p>Please select the media that you would like to purchase today.
                 </p>
-
+                -->
                 <!--Get customer to select which media they wanted-->
                 
                 <!--Change from select class to selectmenu with jquery UI-->
@@ -128,7 +131,7 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                             
                     </select>
                 </div><br>
-                
+                </fieldset>
             <!--Taken out
                 <div class = "form-group ui-widget">
                     <label for="customerMediaSelection">Media Selection (start with AFF or Tandem)</label>
@@ -144,56 +147,62 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                             to receive both video and photos? If yes, a customer service
                             representative will reach out within 24 hours to assist you.
                         </p>
+            
+               <!-- <div class="form-row d-flex justify-content-center">-->
 
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" value="cloud" id="cloudCheck">
+                    <label class="form-check-label pr-5 pl-1" for="cloudCheck">
+                        I understand that my media can take up to 48 hours to complete
+                    </label>
 
+   
+
+    <!--Taken out
+    <input class="form-check-input" type="checkbox" value="dvd" id="dvdCheck">
+    <label class="form-check-label pr-5 pl-1" for="dvdCheck">
+        Mailed DVD
+    </label>
+    -->
+</div>
+
+<!--</div>-->
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="mediaTypeRadio"
-                                id="mediaTypeRadio1" value="yes">
+                            <input class="form-check-input" type="radio" name="mediaTermsAckRadio"
+                                id="mediaTermsAckRadio1" value="yes">
                             <label class="form-check-label" for="mediaTypeRadio1">
                                 I acknowledge
                             </label>
+                      
+
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="mediaTypeRadio"
-                                id="mediaTypeRadio2" value="no" checked>
+                            <input class="form-check-input" type="radio" name="mediaTermsAckRadio"
+                                id="mediaTermsAckRadio2" value="no" checked>
                             <label class="form-check-label" for="mediaTypeRadio2">
                                 I do not acknowledge
                             </label>
+                            <div class="reveal-if-active">
+                                 <!--Needs to be dependent on user selecting no to terms-->
+                            <input class="form-check-input" type="checkbox" value="usb" id="usbCheck">
+                            <label class="form-check-label pr-5 pl-1" for="usbCheck">
+                                I understand that I will need to purchase a USB drive to obtain my media
+                            </label>
+                            </div>
                         </div>
+              
                     </fieldset>
                 </div>
 
-                <!--Get customer to choose their media types-->
+                <!--Get customer to choose their media types, taken out
                 <fieldset class="mediaFormat-border border border-dark rounded p-3 mb-4">
                     <legend class="mediaFormat-border">Choose your media type(s)</legend>
 
-                    <div class="form-row d-flex justify-content-center">
-
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="cloud" id="cloudCheck">
-                            <label class="form-check-label pr-5 pl-1" for="cloudCheck">
-                                I understand that my media can take up to 48 hours to complete
-                            </label>
-
-                            <!--Needs to be dependent on user selecting no to terms-->
-                            <input class="form-check-input" type="checkbox" value="usb" id="usbCheck">
-                            <label class="form-check-label pr-5 pl-1" for="usbCheck">
-                                (Dependendent)I understand that I will need to purchase a USB drive to obtain my media
-                            </label>
-
-                            <!--Taken out
-                            <input class="form-check-input" type="checkbox" value="dvd" id="dvdCheck">
-                            <label class="form-check-label pr-5 pl-1" for="dvdCheck">
-                                Mailed DVD
-                            </label>
-                            -->
-                        </div>
-
-                    </div>
+                    
 
                 </fieldset>
-
+                -->
                 <!--Text area provided for customer to enter additional info-->
                 <!--Taken out
                 <div class="form-group">
@@ -259,15 +268,16 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                 that you do not accept the terms of the agreement, and we would be happy to give you a USB. Please 
                 note that there is an additional cost of $5 for the USB. </p>
                 
-                <!--Button to activate the "Raw ajax" code created-->
+                
+                <!--Button to activate the "Raw ajax" code created. Taken out
                 <button class="btn btn-dark m-3" id="mfgButton"
                                 onclick="mfgRead()">Add checkbox</button>
-            <ul class="list-group" id="mfgItems">
-            
+                    <ul class="list-group" id="mfgItems">
+                    
 
 
-            </ul>
-
+                    </ul>
+                 -->
 
         </div>
     </div>

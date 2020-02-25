@@ -216,7 +216,8 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                 </div>
                 -->
                 <div class = "buttonCenter">
-                    <input type = "submit" value ="Submit">
+                <!--TODO: does name here have to be same name as the form? -->
+                    <input type = "submit" name = "customerInfo" value ="thanks.blade.php">
                     <input type = "reset" value ="Reset">
                 </div>
             </form>

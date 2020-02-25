@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Customer Information</title>
+    <title>New Customer</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/x.x.x/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -83,7 +83,7 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
 
                 <!--Get the customer's email address and ask to re-type email-->
                 <fieldset class="email-border border border-dark rounded p-3 mb-4">
-                    <legend class="email-border">Email Address</legend>
+                    <legend class="email-border">Contact Information</legend>
                     <label for="customerEmail1">Email Address</label>
                     <input type="email" class="form-control mb-3" id="customerEmail1" required
                         placeholder="email@domain.com">
@@ -92,6 +92,9 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                         placeholder="email@domain.com">
                     <small id="email2Tip" class="form-text text-muted ml-3">Both email addresses must
                         match</small>
+                        <label for="customerphoneNum">Phone Number</label>
+                    <input type="customerPhoneNum" class="form-control mb-3" id="customerPhoneNum" required
+                        placeholder="###-###-####">
                 </fieldset>
 
                 <fieldset class="email-border border border-dark rounded p-3 mb-4">
@@ -212,6 +215,10 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                     <textarea class="form-control" id="additionalInformation" rows="3" required></textarea>
                 </div>
                 -->
+                <div class = "buttonCenter">
+                    <input type = "submit" value ="Submit">
+                    <input type = "reset" value ="Reset">
+                </div>
             </form>
         </div>
 

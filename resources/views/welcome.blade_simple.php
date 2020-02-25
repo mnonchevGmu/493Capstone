@@ -4,37 +4,32 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Skydive Orange</title>
+        <title>Skydive Orange Kiosk</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <link rel="stylesheet" type="text/css" href="{{ url('/css/projectStyles.css') }}" />
- 
-        <!-- TODO: point to the bootstrap local vs this CDN link-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
- 
-        <!-- Styles 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        
+       <!-- Styles 
         <style>
            
   
         </style>
         -->
+
+        
     </head>
     <body>
+    <div class="c bg-dark">
+     <h2>Skydive Orange</h2>
 
-      <!--Added todayEnd of today's addition-->
-      <div class="bgimg">
-  <!--            <div class="blankarea">
+        <!--Added todayEnd of today's addition-->
+ <!--           <div class="bgimgsimple">
+              <div class="blankarea">
 -->
-  
- 
-
-    <div class="title bg-black text-center">
-                        <p class="title">Welcome to Skydive Orange</p>
-    </div>
-
         
             <!--
                 @if (Route::has('login'))
@@ -51,24 +46,23 @@
                     </div>
                 @endif
                 -->
-
-                
-                    <div class="links fixed-bottom ">
-                        <div class="d-flex  justify-content-around align-content-center bg-black">
-                            <div class="p-2">
-                            <a href='/new'>New Customer</a>
-                            </div>
-                            <div class="p-2">
-                            
-                            <a href='/returning'>Returning Customer</a>
-                            </div>
-                            </div>  
+                <!--
+                <div class="content">
+                    <div class="title m-b-md fixed-top">
+                        Welcome to Skydive Orange
+                        <hr>  
                     </div>
+                
+                    <div class="links">
+                        <a href='/new'>New Customer</a>
+                        <a href='/returning'>Returning Customer</a>
+                        
+                    </div>
+                </div>
 
             </div>
 
-
-        </div>
+-->
         </div>
     </body>
 </html>

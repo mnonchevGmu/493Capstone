@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Returning Customer</title>
+    <title>New Customer</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/x.x.x/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -57,27 +57,29 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                         style = "margin: 15px 15px 15px 15px">
                 </a>
             </div>
-            <p id="top">Please fill out your name and birth date below so we can find 
-                your reservation.<br><br>
+            <p id="top">Please fill out the form below and read the terms and Conditions
+                of your media purchase.<br><br>
             </p>
         </div>
 
         <div class="container border border-dark p-3 bg-mediumgrey border-width-3">
-            <form id = "customerInfo">
-
+            <form id = "customerInfo" action = "/dopost" method = "POST" target = "_self">
+                <!-- laravel function to prevent cross-site request forgery attacks -->
+                @csrf
+                
                 <!--Get the customer's first name-->
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="mr-2" for="customerFirstName">First Name</label>
                         <input type="text" class="form_control col-md-8" id="customerFirstName" minlength="2" required
-                            placeholder="First Name" name="customerFirstName">
+                            placeholder="First Name">
                     </div>
 
                     <!--Get the customer's last name-->
                     <div class="form-group col-md-6">
                         <label class="mr-2" for="customerLastName">Last Name</label>
                         <input type="text" class="form_control col-md-8" id="customerLastName" minlength="2" required
-                            placeholder="Last Name" name="customerLastName">
+                            placeholder="Last Name">
                     </div>
                 </div>
 
@@ -86,15 +88,15 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                     <legend class="email-border">Contact Information</legend>
                     <label for="customerEmail1">Email Address</label>
                     <input type="email" class="form-control mb-3" id="customerEmail1" required
-                        placeholder="email@domain.com" name="customerEmail1">
+                        placeholder="email@domain.com">
                     <label for="customerEmail2">Re-type Email Address</label>
                     <input type="email" class="form-control " id="customerEmail2" required
-                        placeholder="email@domain.com" name="customerEmail2">
+                        placeholder="email@domain.com">
                     <small id="email2Tip" class="form-text text-muted ml-3">Both email addresses must
                         match</small>
                         <label for="customerphoneNum">Phone Number</label>
                     <input type="customerPhoneNum" class="form-control mb-3" id="customerPhoneNum" required
-                        placeholder="###-###-####" name="customerPhoneNum">
+                        placeholder="###-###-####">
                 </fieldset>
 
                 <fieldset class="email-border border border-dark rounded p-3 mb-4">
@@ -105,7 +107,7 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                     
                     <div class="form-group col-md-6">
                         <label class="mr-2" for="customerJumpDate">Date of Skydive</label>
-                       <input type="date" class="form-control" id="customerJumpDate" name ="customerJumpDate">
+                       <input type="date" class="form-control" id="customerJumpDate">
                     </div>
 
                 </div>
@@ -120,7 +122,7 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                 
                 <div class="form-group">
                     <label for="customerMediaSelection">Media Selection</label>
-                    <select class="form-control" id="customerMediaSelection" name ="customerMediaSelection">
+                    <select class="form-control" id="customerMediaSelection">
                             <optgroup label="Tandem">
                                     <option>Tandem Video Only</option>
                                     <option>Tandem Photos Only</option>
@@ -154,7 +156,7 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                <!-- <div class="form-row d-flex justify-content-center">-->
 
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" value="cloud" id="cloudCheck" name ="cloudCheck">
+                    <input class="form-check-input" type="checkbox" value="cloud" id="cloudCheck">
                     <label class="form-check-label pr-5 pl-1" for="cloudCheck">
                         I understand that my media can take up to 48 hours to complete
                     </label>
@@ -188,7 +190,7 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                             </label>
                             <div class="reveal-if-active">
                                  <!--Needs to be dependent on user selecting no to terms-->
-                            <input class="form-check-input" type="checkbox" value="usb" id="usbCheck" name ="usbCheck">
+                            <input class="form-check-input" type="checkbox" value="usb" id="usbCheck">
                             <label class="form-check-label pr-5 pl-1" for="usbCheck">
                                 I understand that I will need to purchase a USB drive to obtain my media
                             </label>
@@ -216,7 +218,8 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
                 </div>
                 -->
                 <div class = "buttonCenter">
-                    <input type = "submit" value ="Submit">
+                <!--TODO: does name here have to be same name as the form? -->
+                    <input type = "submit" name = "customerInfo" value ="Submit">
                     <input type = "reset" value ="Reset">
                 </div>
             </form>
@@ -290,10 +293,10 @@ src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-metho
     </div>
 </div>
 
-<!--Container for the footer-->
+<!--Container for the footer
 <div class="navbar navbar-expand-sm navbar-default navbar-fixed-bottom" id="footerBar">
     <div class="container">
-
+-->
     <!--Taken out
         <div class="col-md-6">
             <p><em>Disclaimer: This website is developed as an educational project.</em></p>

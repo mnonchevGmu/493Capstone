@@ -56,11 +56,11 @@
                     <div class="links fixed-bottom ">
                         <div class="d-flex  justify-content-around align-content-center bg-black">
                             <div class="p-2">
-                            <a href='/new'>New Customer</a>
+                            <a href='/new'> New Customer</a>
                             </div>
                             <div class="p-2">
                             
-                            <a href='/returning'>Returning Customer</a>
+                            <a href='/returning'> Returning Customer</a>
                             </div>
                             </div>  
                     </div>

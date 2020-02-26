@@ -53,8 +53,8 @@
                 -->
 
                 
-                    <div class="links fixed-bottom ">
-                        <div class="d-flex  justify-content-around align-content-center bg-black">
+                    <div class="links fixed-bottom m-b-md">
+                        <div class="d-flex  justify-content-around align-content-center">
                             <div class="p-2">
                             <a href='/new'> New Customer</a>
                             </div>

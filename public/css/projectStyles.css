@@ -120,13 +120,14 @@ legend.mediaFormat-border{
 	
 	}
 
-/*Styles for the pseudo links*/
+/*Styles for the pseudo links
 a:visited{
 	color: rgb(255, 217, 0);
 }
+*/
 
 a:link{
-	color: black;
+	color: rgb(255, 217, 0);
 }
 
 .navBtns{
@@ -231,9 +232,9 @@ a:link{
 }
 
 .links > a {
-    color: #636b6f;
+    color: white;
     padding: 0 25px;
-    font-size: 13px;
+    font-size: 25px;
     font-weight: 600;
     letter-spacing: .1rem;
     text-decoration: none;
@@ -241,7 +242,7 @@ a:link{
 }
 
 .m-b-md {
-    margin-bottom: 30px;
+    margin-bottom: 90px;
 }
 
 
@@ -268,14 +269,16 @@ a:link{
   background-color: rgb(0, 0, 0);
   color: #ffffff;
 }
+/*styling for the welcome page links*/
 .links  {
-    color: #e5edf0;
+    color: rgb(255, 217, 0);
     padding: 0 25px;
-    font-size: 13px;
+    font-size: 25px;
     font-weight: 600;
     letter-spacing: .1rem;
     text-decoration: none;
     text-transform: uppercase;
+    font-family: 'Nunito', sans-serif;
 }
 
 

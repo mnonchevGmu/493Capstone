@@ -46,11 +46,11 @@
 -->
     <!--Beginning of the main content where the user is asked to enter info on a form-->
     <div class="row">
-        <div class="col-md-8 col1color">
+        <div class="col-md-12 col1color">
             <div class="container mt-4">
                 <div class="topleft">
                 </div>
-                <p id="top">Please fill out the form below and read the terms and Conditions
+                <p id="top" class = "col-md-12">Please fill out the form below and read the Terms and Conditions
                     of your media purchase.<br>
                 </p>
             </div>
@@ -147,8 +147,8 @@
                                 <div class="row">
                                     <!--TODO: remove borders -->
 
-                                    <div class="col-5 border">
-                                        <div class="row p-2 border">
+                                    <div class="col-5">
+                                        <div class="row p-2">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="mediaTermsAckRadio"
                                                     id="mediaTermsAckRadio1" value="yes" checked>
@@ -169,7 +169,7 @@
                                                         I <u>do not</u> acknowledge
                                                     </label>
 
-                                                <div class="row reveal-if-active border">
+                                                <div class="row reveal-if-active">
 
                                                     <!--Needs to be dependent on user selecting no to terms-->
                                                     <input class="form-check-input" type="checkbox" value="usb"
@@ -184,6 +184,8 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                   
                                     <div class="col">
                                         <p>that my media will be uploaded to public media services such as Youtube and
                                             Dropbox
@@ -215,14 +217,6 @@
     </label>
     -->
                             </div>
-
-
-
-
-
-
-
-
 
                         </fieldset>
                     </div>
@@ -256,68 +250,7 @@
             <a href="#top">Go back to the top of the page</a>
         </div>
 
-        <!--Beginning of side content-->
-        <div class="col-md-4 col2color">
-            <h2 class="h2 p-3">Terms and Conditions</h2>
 
-
-            <div class="border border-dark rounded p-3 mb-4">
-                <p> <span class="InitLetterBold pr-3">Q:</span> How soon should I expect to get my skydiving media
-                    (digital
-                    video and photos)?</p>
-
-                <p> <span class="InitLetterBold pr-3">A:</span> We are excited for you to receive your media as
-                    quick as
-                    possible; however,
-                    there are a number of factors which influence when you will receive your media.
-                    Primarily, the upload speeds to YouTube and Dropbox may cause delays, as the media
-                    we capture is high resolution (see below). Additionally, during busy days we have
-                    our videographers working hard capturing the freefall experience for many students
-                    and often have to do back-to-back jumps. </p>
-                <p>
-                    Generally, we expect to have your skydiving media uploaded within 24 hours of the day of your
-                    skydive;
-                    however, we have seen the media from busy weekends take 48-72 hours if our media hosting
-                    providers
-                    (YouTube and Dropbox) is unresponsive.
-                </p>
-                <p>
-                    If you have not seen the completion emails from us within 48 hours from the day of your skydive,
-                    please
-                    contact us.
-                </p>
-            </div>
-            <div class="border border-dark rounded p-3 mb-4">
-
-                <p> <span class="InitLetterBold pr-3">Q:</span> What kind of media will I receive?
-                </p>
-                <p> <span class="InitLetterBold pr-3">A:</span>
-                    Skydive videos are all shot in 1080p / 60fps and output from our editing software at that same
-                    resolution. The still pictures may have different image sizes, based on the and ~ 24 megapixels.
-                </p>
-            </div>
-
-            <!--Container that includes external links to different skydiving manufacturers-->
-            <div class="border border-dark rounded p-3 mb-4">
-                <p> <span class="InitLetterBold pr-3">Q:</span> What if I don't want my video on Youtube?</p>
-
-                <p> <span class="InitLetterBold pr-3">A:</span> Please select the option within the form to indicate
-                    that you do not accept the terms of the agreement, and we would be happy to give you a USB. Please
-                    note that there is an additional cost of $5 for the USB. </p>
-
-
-                <!--Button to activate the "Raw ajax" code created. Taken out
-                <button class="btn btn-dark m-3" id="mfgButton"
-                                onclick="mfgRead()">Add checkbox</button>
-                    <ul class="list-group" id="mfgItems">
-                    
-
-
-                    </ul>
-                 -->
-
-            </div>
-        </div>
     </div>
 
     <!--Container for the footer

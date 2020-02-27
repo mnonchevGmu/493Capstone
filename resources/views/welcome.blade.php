@@ -32,7 +32,7 @@
  
 
     <div class="title bg-black text-center">
-                        <p class="title">Welcome to Skydive Orange</p>
+                        <p class="welcomeTitle">Welcome to Skydive Orange</p>
     </div>
 
         
@@ -56,12 +56,15 @@
                     <div class="links fixed-bottom m-b-md">
                         <div class="d-flex  justify-content-around align-content-center">
                             <div class="p-2">
-                            <a href='/new'> New Customer</a>
+                            <a href='/new' class = "links"> Check In Here</a>
                             </div>
+
+                        <!-- Took the returning customer page out
                             <div class="p-2">
                             
-                            <a href='/returning'> Returning Customer</a>
+                            <a href='/returning' class = "links"> Returning Customer</a>
                             </div>
+                        -->
                             </div>  
                     </div>
 

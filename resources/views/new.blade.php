@@ -48,9 +48,8 @@
     <div class="row">
         <div class="col-md-12 col1color">
             <div class="container mt-4">
-                <div class="topleft">
-                </div>
-                <p id="top" class = "col-md-12">Please fill out the form below and read the Terms and Conditions
+               
+                <p id="top" class = "col-md-12 col1color">Please fill out the form below and read the Terms and Conditions
                     of your media purchase.<br>
                 </p>
             </div>
@@ -246,8 +245,7 @@
                 </form>
             </div>
 
-            <!--Internal link that brings customer back to top of the page-->
-            <a href="#top">Go back to the top of the page</a>
+  
         </div>
 
 

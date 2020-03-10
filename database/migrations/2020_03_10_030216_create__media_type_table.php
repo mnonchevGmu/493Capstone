@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMediaTypeLovTable extends Migration
+class CreateMediaTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateMediaTypeLovTable extends Migration
      */
     public function up()
     {
-        Schema::create('MEDIA_TYPE_LOV', function (Blueprint $table) {
+        Schema::create('_media_type', function (Blueprint $table) {
+            $table->bigIncrements('media_id');
             $table->string('MEDIA_TYPE');
             $table->string('MEDIA_TYPE_DESCRIPTION');
             $table->date('CREATION_DATE');
             $table->date('LAST_UPDATE_DATE');
-            $table->primary('MEDIA_TYPE');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +30,6 @@ class CreateMediaTypeLovTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('MEDIA_TYPE_LOV');
+        Schema::dropIfExists('_media_type');
     }
 }

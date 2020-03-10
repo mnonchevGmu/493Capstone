@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePhoneTypeLovTable extends Migration
+class CreatePhoneTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreatePhoneTypeLovTable extends Migration
      */
     public function up()
     {
-        Schema::create('PHONE_TYPE_LOV', function (Blueprint $table) {
+        Schema::create('_phone_type', function (Blueprint $table) {
+       		$table->bigIncrements('Phone_id');
             $table->string('PHONE_TYPE');
             $table->string('PHONE_TYPE_DESCRIPTION');
             $table->date('Creation_date');
             $table->date('Last_update_date');
-            $table->primary('PHONE_TYPE');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +30,6 @@ class CreatePhoneTypeLovTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('PHONE_TYPE_LOV');
+        Schema::dropIfExists('_phone_type');
     }
 }

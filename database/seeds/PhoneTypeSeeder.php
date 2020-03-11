@@ -20,7 +20,7 @@ class PhoneTypeSeeder extends Seeder
         // Date and time of creation
         $currenttime =Carbon::now();
         // Insert CEll type       
-        DB::table('PHONE_TYPE')->insert([
+        DB::table('PHONE_TYPE_LOV')->insert([
             'PHONE_TYPE' => 'CELL',
             'PHONE_TYPE_DESCRIPTION' => 'Cell Phone',
             'CREATION_DATE' => $currenttime,
@@ -28,7 +28,7 @@ class PhoneTypeSeeder extends Seeder
         ]);
 
         // Insert HOME type       
-        DB::table('PHONE_TYPE')->insert([
+        DB::table('PHONE_TYPE_LOV')->insert([
             'PHONE_TYPE' => 'HOME',
             'PHONE_TYPE_DESCRIPTION' => 'Home Phone',
             'CREATION_DATE' => $currenttime,
@@ -37,7 +37,7 @@ class PhoneTypeSeeder extends Seeder
 
         
         // Insert WORK type       
-        DB::table('PHONE_TYPE')->insert([
+        DB::table('PHONE_TYPE_LOV')->insert([
             'PHONE_TYPE' => 'WORK',
             'PHONE_TYPE_DESCRIPTION' => 'Work Phone',
             'CREATION_DATE' => $currenttime,

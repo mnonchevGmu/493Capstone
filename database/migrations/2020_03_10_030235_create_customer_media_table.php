@@ -15,15 +15,15 @@ class CreateCustomerMediaTable extends Migration
     {
     	Schema::disableForeignKeyConstraints();
         Schema::create('CUSTOMER_MEDIA', function (Blueprint $table) {
-            $table->bigIncrements('CUSTMED_ID');
+            $table->bigIncrements('CUSTOMER_MEDIA_ID');
             $table->bigInteger('CUSTOMER_ID')->unsigned();
             $table->date('SKYDIVE_DATE');
             $table->boolean('DELIVERY_TIME_ACK');
             $table->boolean('MEDIA_TERMS_ACK');
             $table->boolean('USB_REQUIRED_ACK');
-            $table->bigInteger('MEDIA_ID')->unsigned();
+            $table->string('MEDIA_TYPE');
             $table->foreign('CUSTOMER_ID')->references('CUSTOMER_ID')->on('CUSTOMERS');
-            $table->foreign('MEDIA_ID')->references('MEDIA_ID')->on('MEDIA_TYPE');
+            $table->foreign('MEDIA_TYPE')->references('MEDIA_TYPE')->on('MEDIA_TYPE_LOV');
             $table->timestamps();
         });
           Schema::enableForeignKeyConstraints();

@@ -34,7 +34,7 @@ class Collection implements ArrayAccess, Enumerable
      * Create a new collection by invoking the callback a given amount of times.
      *
      * @param  int  $number
-     * @param  callable|null  $callback
+     * @param  callable  $callback
      * @return static
      */
     public static function times($number, callable $callback = null)
@@ -513,7 +513,7 @@ class Collection implements ArrayAccess, Enumerable
      * Concatenate values of a given key as a string.
      *
      * @param  string  $value
-     * @param  string|null  $glue
+     * @param  string  $glue
      * @return string
      */
     public function implode($value, $glue = null)
@@ -806,16 +806,14 @@ class Collection implements ArrayAccess, Enumerable
     }
 
     /**
-     * Push one or more items onto the end of the collection.
+     * Push an item onto the end of the collection.
      *
-     * @param  mixed  $values [optional]
+     * @param  mixed  $value
      * @return $this
      */
-    public function push(...$values)
+    public function push($value)
     {
-        foreach ($values as $value) {
-            $this->items[] = $value;
-        }
+        $this->items[] = $value;
 
         return $this;
     }
@@ -959,7 +957,7 @@ class Collection implements ArrayAccess, Enumerable
     /**
      * Shuffle the items in the collection.
      *
-     * @param  int|null  $seed
+     * @param  int  $seed
      * @return static
      */
     public function shuffle($seed = null)
@@ -982,7 +980,7 @@ class Collection implements ArrayAccess, Enumerable
      * Slice the underlying collection array.
      *
      * @param  int  $offset
-     * @param  int|null  $length
+     * @param  int  $length
      * @return static
      */
     public function slice($offset, $length = null)
@@ -1054,28 +1052,13 @@ class Collection implements ArrayAccess, Enumerable
      * @param  callable|null  $callback
      * @return static
      */
-    public function sort($callback = null)
+    public function sort(callable $callback = null)
     {
         $items = $this->items;
 
-        $callback && is_callable($callback)
+        $callback
             ? uasort($items, $callback)
-            : asort($items, $callback);
-
-        return new static($items);
-    }
-
-    /**
-     * Sort items in descending order.
-     *
-     * @param  int  $options
-     * @return static
-     */
-    public function sortDesc($options = SORT_REGULAR)
-    {
-        $items = $this->items;
-
-        arsort($items, $options);
+            : asort($items);
 
         return new static($items);
     }

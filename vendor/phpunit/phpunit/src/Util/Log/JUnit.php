@@ -123,7 +123,7 @@ final class JUnit extends Printer implements TestListener
      */
     public function addError(Test $test, \Throwable $t, float $time): void
     {
-        $this->doAddFault($test, $t, 'error');
+        $this->doAddFault($test, $t, $time, 'error');
         $this->testSuiteErrors[$this->testSuiteLevel]++;
     }
 
@@ -132,7 +132,7 @@ final class JUnit extends Printer implements TestListener
      */
     public function addWarning(Test $test, Warning $e, float $time): void
     {
-        $this->doAddFault($test, $e, 'warning');
+        $this->doAddFault($test, $e, $time, 'warning');
         $this->testSuiteWarnings[$this->testSuiteLevel]++;
     }
 
@@ -141,7 +141,7 @@ final class JUnit extends Printer implements TestListener
      */
     public function addFailure(Test $test, AssertionFailedError $e, float $time): void
     {
-        $this->doAddFault($test, $e, 'failure');
+        $this->doAddFault($test, $e, $time, 'failure');
         $this->testSuiteFailures[$this->testSuiteLevel]++;
     }
 
@@ -378,7 +378,7 @@ final class JUnit extends Printer implements TestListener
         return $this->document->saveXML();
     }
 
-    private function doAddFault(Test $test, \Throwable $t, string $type): void
+    private function doAddFault(Test $test, \Throwable $t, float $time, $type): void
     {
         if ($this->currentTestCase === null) {
             return;

@@ -20,8 +20,8 @@ class CreateCustomersTable extends Migration
             $table->string('LAST_NAME');
             $table->string('EMAIL_ADDRESS');
             $table->string('PHONE_NUMBER');
-            $table->bigInteger('Phone_id')->unsigned();
-            $table->foreign('Phone_id')->references('Phone_id')->on('_phone_type');
+            $table->string('PHONE_TYPE')->unsigned();
+            $table->foreign('PHONE_TYPE')->references('PHONE_TYPE')->on('_phone_type');
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();

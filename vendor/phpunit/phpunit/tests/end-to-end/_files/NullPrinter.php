@@ -9,19 +9,11 @@
  */
 namespace PHPUnit\Test;
 
+use PHPUnit\Framework\TestListener;
 use PHPUnit\Framework\TestListenerDefaultImplementation;
-use PHPUnit\Framework\TestResult;
-use PHPUnit\TextUI\ResultPrinter;
+use PHPUnit\Util\Printer;
 
-final class NullPrinter implements ResultPrinter
+final class NullPrinter extends Printer implements TestListener
 {
     use TestListenerDefaultImplementation;
-
-    public function printResult(TestResult $result): void
-    {
-    }
-
-    public function write(string $buffer): void
-    {
-    }
 }

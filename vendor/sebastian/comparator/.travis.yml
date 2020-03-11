@@ -1,10 +1,11 @@
 language: php
 
-dist: bionic
+sudo: false
 
 php:
-  - 7.3
-  - 7.4
+  - 7.1
+  - 7.2
+  - master
 
 env:
   matrix:
@@ -13,9 +14,13 @@ env:
   global:
     - DEFAULT_COMPOSER_FLAGS="--no-interaction --no-ansi --no-progress --no-suggest"
 
+before_install:
+  - composer self-update
+  - composer clear-cache
+
 install:
-  - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry ./tools/composer update $DEFAULT_COMPOSER_FLAGS; fi
-  - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry ./tools/composer update $DEFAULT_COMPOSER_FLAGS --prefer-lowest; fi
+  - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS; fi
+  - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS --prefer-lowest; fi
 
 script:
   - ./vendor/bin/phpunit --coverage-clover=coverage.xml
@@ -25,3 +30,4 @@ after_success:
 
 notifications:
   email: false
+

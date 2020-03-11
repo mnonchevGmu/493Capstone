@@ -10,11 +10,6 @@
 namespace PHPUnit\Util;
 
 use PHPUnit\Framework\TestCase;
-use PHPUnit\TextUI\Configuration\Filter as FilterConfiguration;
-use PHPUnit\TextUI\Configuration\FilterDirectory;
-use PHPUnit\TextUI\Configuration\FilterDirectoryCollection;
-use PHPUnit\TextUI\Configuration\FilterFile;
-use PHPUnit\TextUI\Configuration\FilterFileCollection;
 
 /**
  * @small
@@ -48,46 +43,40 @@ EOF;
         $directoryPathThatDoesNotExist = \sprintf('%s/path/that/does/not/exist', __DIR__);
         $this->assertDirectoryNotExists($directoryPathThatDoesNotExist);
 
-        $filterConfiguration = new FilterConfiguration(
-            FilterDirectoryCollection::fromArray(
-                [
-                    new FilterDirectory(
-                        __DIR__,
-                        '',
-                        '.php',
-                        'DEFAULT'
-                    ),
-                    new FilterDirectory(
-                        \sprintf('%s/', __DIR__),
-                        '',
-                        '.php',
-                        'DEFAULT'
-                    ),
-                    new FilterDirectory(
-                        \sprintf('%s/./%s', \dirname(__DIR__), \basename(__DIR__)),
-                        '',
-                        '.php',
-                        'DEFAULT'
-                    ),
-                    new FilterDirectory(
-                        $directoryPathThatDoesNotExist,
-                        '',
-                        '.php',
-                        'DEFAULT'
-                    ),
-                ]
-            ),
-            FilterFileCollection::fromArray(
-                [
-                    new FilterFile('src/foo.php'),
-                    new FilterFile('src/bar.php'),
-                ]
-            ),
-            FilterDirectoryCollection::fromArray([]),
-            FilterFileCollection::fromArray([]),
-            true,
-            true
-        );
+        $filterConfiguration = [
+            'include' => [
+                'directory' => [
+                    [
+                        'path'   => __DIR__,
+                        'suffix' => '.php',
+                        'prefix' => '',
+                    ],
+                    [
+                        'path'   => \sprintf('%s/', __DIR__),
+                        'suffix' => '.php',
+                        'prefix' => '',
+                    ],
+                    [
+                        'path'   => \sprintf('%s/./%s', \dirname(__DIR__), \basename(__DIR__)),
+                        'suffix' => '.php',
+                        'prefix' => '',
+                    ],
+                    [
+                        'path'   => $directoryPathThatDoesNotExist,
+                        'suffix' => '.php',
+                        'prefix' => '',
+                    ],
+                ],
+                'file' => [
+                    'src/foo.php',
+                    'src/bar.php',
+                ],
+            ],
+            'exclude' => [
+                'directory' => [],
+                'file'      => [],
+            ],
+        ];
 
         $writer = new XdebugFilterScriptGenerator;
         $actual = $writer->generate($filterConfiguration);

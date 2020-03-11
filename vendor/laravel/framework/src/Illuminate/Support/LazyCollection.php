@@ -51,7 +51,7 @@ class LazyCollection implements Enumerable
      * Create a new instance by invoking the callback a given amount of times.
      *
      * @param  int  $number
-     * @param  callable|null  $callback
+     * @param  callable  $callback
      * @return static
      */
     public static function times($number, callable $callback = null)
@@ -512,7 +512,7 @@ class LazyCollection implements Enumerable
      * Concatenate values of a given key as a string.
      *
      * @param  string  $value
-     * @param  string|null  $glue
+     * @param  string  $glue
      * @return string
      */
     public function implode($value, $glue = null)
@@ -916,7 +916,7 @@ class LazyCollection implements Enumerable
     /**
      * Shuffle the items in the collection.
      *
-     * @param  int|null  $seed
+     * @param  int  $seed
      * @return static
      */
     public function shuffle($seed = null)
@@ -951,7 +951,7 @@ class LazyCollection implements Enumerable
      * Get a slice of items from the enumerable.
      *
      * @param  int  $offset
-     * @param  int|null  $length
+     * @param  int  $length
      * @return static
      */
     public function slice($offset, $length = null)
@@ -1018,23 +1018,12 @@ class LazyCollection implements Enumerable
     /**
      * Sort through each item with a callback.
      *
-     * @param  callable|null|int  $callback
+     * @param  callable|null  $callback
      * @return static
      */
-    public function sort($callback = null)
+    public function sort(callable $callback = null)
     {
         return $this->passthru('sort', func_get_args());
-    }
-
-    /**
-     * Sort items in descending order.
-     *
-     * @param  int  $options
-     * @return static
-     */
-    public function sortDesc($options = SORT_REGULAR)
-    {
-        return $this->passthru('sortDesc', func_get_args());
     }
 
     /**

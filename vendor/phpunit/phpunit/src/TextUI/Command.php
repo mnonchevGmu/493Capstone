@@ -15,15 +15,14 @@ use PharIo\Manifest\ManifestLoader;
 use PharIo\Version\Version as PharIoVersion;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\Test;
+use PHPUnit\Framework\TestListener;
 use PHPUnit\Framework\TestSuite;
 use PHPUnit\Runner\StandardTestSuiteLoader;
 use PHPUnit\Runner\TestSuiteLoader;
 use PHPUnit\Runner\TestSuiteSorter;
 use PHPUnit\Runner\Version;
-use PHPUnit\TextUI\Configuration\Generator;
-use PHPUnit\TextUI\Configuration\PhpHandler;
-use PHPUnit\TextUI\Configuration\Registry;
-use PHPUnit\TextUI\Configuration\TestSuiteMapper;
+use PHPUnit\Util\Configuration;
+use PHPUnit\Util\ConfigurationGenerator;
 use PHPUnit\Util\FileLoader;
 use PHPUnit\Util\Filesystem;
 use PHPUnit\Util\Getopt;
@@ -174,6 +173,7 @@ class Command
         } else {
             $suite = $runner->getTest(
                 $this->arguments['test'],
+                $this->arguments['testFile'],
                 $this->arguments['testSuffixes']
             );
         }
@@ -197,7 +197,7 @@ class Command
         unset($this->arguments['test'], $this->arguments['testFile']);
 
         try {
-            $result = $runner->run($suite, $this->arguments, $exit);
+            $result = $runner->doRun($suite, $this->arguments, $exit);
         } catch (Exception $e) {
             print $e->getMessage() . \PHP_EOL;
         }
@@ -285,7 +285,7 @@ class Command
         foreach ($this->options[0] as $option) {
             switch ($option[0]) {
                 case '--colors':
-                    $this->arguments['colors'] = $option[1] ?: DefaultResultPrinter::COLOR_AUTO;
+                    $this->arguments['colors'] = $option[1] ?: ResultPrinter::COLOR_AUTO;
 
                     break;
 
@@ -421,7 +421,7 @@ class Command
                         $src = 'src';
                     }
 
-                    $generator = new Generator;
+                    $generator = new ConfigurationGenerator;
 
                     \file_put_contents(
                         'phpunit.xml',
@@ -723,11 +723,7 @@ class Command
                     break;
 
                 case '--whitelist':
-                    if (!isset($this->arguments['whitelist'])) {
-                        $this->arguments['whitelist'] = [];
-                    }
-
-                    $this->arguments['whitelist'][] = $option[1];
+                    $this->arguments['whitelist'] = $option[1];
 
                     break;
 
@@ -784,19 +780,49 @@ class Command
             $this->arguments['testSuffixes'] = ['Test.php', '.phpt'];
         }
 
-        if (
-            !isset($this->arguments['test']) &&
-            isset($this->options[1][0])
-        ) {
-            $this->arguments['test'] = \realpath($this->options[1][0]);
+        if (isset($this->options[1][0]) &&
+            \substr($this->options[1][0], -5, 5) !== '.phpt' &&
+            \substr($this->options[1][0], -4, 4) !== '.php' &&
+            \substr($this->options[1][0], -1, 1) !== '/' &&
+            !\is_dir($this->options[1][0])) {
+            $this->arguments['warnings'][] = 'Invocation with class name is deprecated';
+        }
 
-            if ($this->arguments['test'] === false) {
-                $this->exitWithErrorMessage(
-                    \sprintf(
-                        'Cannot open file "%s".',
-                        $this->options[1][0]
-                    )
-                );
+        if (!isset($this->arguments['test'])) {
+            if (isset($this->options[1][0])) {
+                $this->arguments['test'] = $this->options[1][0];
+            }
+
+            if (isset($this->options[1][1])) {
+                $testFile = \realpath($this->options[1][1]);
+
+                if ($testFile === false) {
+                    $this->exitWithErrorMessage(
+                        \sprintf(
+                            'Cannot open file "%s".',
+                            $this->options[1][1]
+                        )
+                    );
+                }
+                $this->arguments['testFile'] = $testFile;
+            } else {
+                $this->arguments['testFile'] = '';
+            }
+
+            if (isset($this->arguments['test']) &&
+                \is_file($this->arguments['test']) &&
+                \strrpos($this->arguments['test'], '.') !== false &&
+                \substr($this->arguments['test'], -5, 5) !== '.phpt') {
+                $this->arguments['testFile'] = \realpath($this->arguments['test']);
+                $this->arguments['test']     = \substr($this->arguments['test'], 0, \strrpos($this->arguments['test'], '.'));
+            }
+
+            if (isset($this->arguments['test']) &&
+                \is_string($this->arguments['test']) &&
+                \substr($this->arguments['test'], -5, 5) === '.phpt') {
+                $suite = new TestSuite;
+                $suite->addTestFile($this->arguments['test']);
+                $this->arguments['test'] = $suite;
             }
         }
 
@@ -837,67 +863,77 @@ class Command
 
         if (isset($this->arguments['configuration'])) {
             try {
-                $configuration = Registry::getInstance()->get($this->arguments['configuration']);
+                $configuration = Configuration::getInstance(
+                    $this->arguments['configuration']
+                );
             } catch (Throwable $t) {
                 print $t->getMessage() . \PHP_EOL;
                 exit(TestRunner::FAILURE_EXIT);
             }
 
-            $phpunitConfiguration = $configuration->phpunit();
+            $phpunitConfiguration = $configuration->getPHPUnitConfiguration();
 
-            (new PhpHandler)->handle($configuration->php());
+            $configuration->handlePHPConfiguration();
 
+            /*
+             * Issue #1216
+             */
             if (isset($this->arguments['bootstrap'])) {
                 $this->handleBootstrap($this->arguments['bootstrap']);
-            } elseif ($phpunitConfiguration->hasBootstrap()) {
-                $this->handleBootstrap($phpunitConfiguration->bootstrap());
+            } elseif (isset($phpunitConfiguration['bootstrap'])) {
+                $this->handleBootstrap($phpunitConfiguration['bootstrap']);
             }
 
-            if (!isset($this->arguments['stderr'])) {
-                $this->arguments['stderr'] = $phpunitConfiguration->stderr();
+            /*
+             * Issue #657
+             */
+            if (isset($phpunitConfiguration['stderr']) && !isset($this->arguments['stderr'])) {
+                $this->arguments['stderr'] = $phpunitConfiguration['stderr'];
             }
 
-            if (!isset($this->arguments['noExtensions']) && $phpunitConfiguration->hasExtensionsDirectory() && \extension_loaded('phar')) {
-                $this->handleExtensions($phpunitConfiguration->extensionsDirectory());
+            if (isset($phpunitConfiguration['extensionsDirectory']) && !isset($this->arguments['noExtensions']) && \extension_loaded('phar')) {
+                $this->handleExtensions($phpunitConfiguration['extensionsDirectory']);
             }
 
-            if (!isset($this->arguments['columns'])) {
-                $this->arguments['columns'] = $phpunitConfiguration->columns();
+            if (isset($phpunitConfiguration['columns']) && !isset($this->arguments['columns'])) {
+                $this->arguments['columns'] = $phpunitConfiguration['columns'];
             }
 
-            if (!isset($this->arguments['printer']) && $phpunitConfiguration->hasPrinterClass()) {
-                $file = $phpunitConfiguration->hasPrinterFile() ? $phpunitConfiguration->printerFile() : '';
+            if (!isset($this->arguments['printer']) && isset($phpunitConfiguration['printerClass'])) {
+                $file = $phpunitConfiguration['printerFile'] ?? '';
 
                 $this->arguments['printer'] = $this->handlePrinter(
-                    $phpunitConfiguration->printerClass(),
+                    $phpunitConfiguration['printerClass'],
                     $file
                 );
             }
 
-            if ($phpunitConfiguration->hasTestSuiteLoaderClass()) {
-                $file = $phpunitConfiguration->hasTestSuiteLoaderFile() ? $phpunitConfiguration->testSuiteLoaderFile() : '';
+            if (isset($phpunitConfiguration['testSuiteLoaderClass'])) {
+                $file = $phpunitConfiguration['testSuiteLoaderFile'] ?? '';
 
                 $this->arguments['loader'] = $this->handleLoader(
-                    $phpunitConfiguration->testSuiteLoaderClass(),
+                    $phpunitConfiguration['testSuiteLoaderClass'],
                     $file
                 );
             }
 
-            if (!isset($this->arguments['testsuite']) && $phpunitConfiguration->hasDefaultTestSuite()) {
-                $this->arguments['testsuite'] = $phpunitConfiguration->defaultTestSuite();
+            if (!isset($this->arguments['testsuite']) && isset($phpunitConfiguration['defaultTestSuite'])) {
+                $this->arguments['testsuite'] = $phpunitConfiguration['defaultTestSuite'];
             }
 
             if (!isset($this->arguments['test'])) {
-                $this->arguments['test'] = (new TestSuiteMapper)->map(
-                    $configuration->testSuite(),
-                    $this->arguments['testsuite'] ?? ''
-                );
+                $testSuite = $configuration->getTestSuiteConfiguration($this->arguments['testsuite'] ?? '');
+
+                if ($testSuite !== null) {
+                    $this->arguments['test'] = $testSuite;
+                }
             }
         } elseif (isset($this->arguments['bootstrap'])) {
             $this->handleBootstrap($this->arguments['bootstrap']);
         }
 
-        if (isset($this->arguments['printer']) && \is_string($this->arguments['printer'])) {
+        if (isset($this->arguments['printer']) &&
+            \is_string($this->arguments['printer'])) {
             $this->arguments['printer'] = $this->handlePrinter($this->arguments['printer']);
         }
 
@@ -970,7 +1006,7 @@ class Command
     protected function handlePrinter(string $printerClass, string $printerFile = '')
     {
         if (!\class_exists($printerClass, false)) {
-            if ($printerFile === '') {
+            if ($printerFile == '') {
                 $printerFile = Filesystem::classNameToFilename(
                     $printerClass
                 );
@@ -1004,12 +1040,22 @@ class Command
             // @codeCoverageIgnoreEnd
         }
 
-        if (!$class->implementsInterface(ResultPrinter::class)) {
+        if (!$class->implementsInterface(TestListener::class)) {
             $this->exitWithErrorMessage(
                 \sprintf(
                     'Could not use "%s" as printer: class does not implement %s',
                     $printerClass,
-                    ResultPrinter::class
+                    TestListener::class
+                )
+            );
+        }
+
+        if (!$class->isSubclassOf(Printer::class)) {
+            $this->exitWithErrorMessage(
+                \sprintf(
+                    'Could not use "%s" as printer: class does not extend %s',
+                    $printerClass,
+                    Printer::class
                 )
             );
         }
@@ -1169,12 +1215,14 @@ class Command
 
         print 'Available test suite(s):' . \PHP_EOL;
 
-        $configuration = Registry::getInstance()->get($this->arguments['configuration']);
+        $configuration = Configuration::getInstance(
+            $this->arguments['configuration']
+        );
 
-        foreach ($configuration->testSuite() as $testSuite) {
+        foreach ($configuration->getTestSuiteNames() as $suiteName) {
             \printf(
                 ' - %s' . \PHP_EOL,
-                $testSuite->name()
+                $suiteName
             );
         }
 

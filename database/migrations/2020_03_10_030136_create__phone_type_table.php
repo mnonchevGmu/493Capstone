@@ -14,11 +14,11 @@ class CreatePhoneTypeTable extends Migration
     public function up()
     {
         Schema::create('_phone_type', function (Blueprint $table) {
-       		$table->bigIncrements('Phone_id');
             $table->string('PHONE_TYPE');
             $table->string('PHONE_TYPE_DESCRIPTION');
             $table->date('Creation_date');
             $table->date('Last_update_date');
+            $table->primary('PHONE_TYPE');
             $table->timestamps();
         });
     }

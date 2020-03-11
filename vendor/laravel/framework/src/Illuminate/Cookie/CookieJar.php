@@ -27,18 +27,18 @@ class CookieJar implements JarContract
     protected $domain;
 
     /**
-     * The default secure setting (defaults to null).
+     * The default secure setting (defaults to false).
      *
-     * @var bool|null
+     * @var bool
      */
-    protected $secure;
+    protected $secure = false;
 
     /**
-     * The default SameSite option (defaults to lax).
+     * The default SameSite option (if specified).
      *
      * @var string
      */
-    protected $sameSite = 'lax';
+    protected $sameSite;
 
     /**
      * All of the cookies queued for sending.
@@ -140,10 +140,10 @@ class CookieJar implements JarContract
      */
     public function queue(...$parameters)
     {
-        if (isset($parameters[0]) && $parameters[0] instanceof Cookie) {
-            $cookie = $parameters[0];
+        if (head($parameters) instanceof Cookie) {
+            $cookie = head($parameters);
         } else {
-            $cookie = $this->make(...$parameters);
+            $cookie = call_user_func_array([$this, 'make'], $parameters);
         }
 
         if (! isset($this->queued[$cookie->getName()])) {

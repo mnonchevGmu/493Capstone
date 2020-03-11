@@ -81,11 +81,8 @@ final class CallableType extends Type
      */
     private function hasInvokeMethod(ObjectType $type): bool
     {
-        $className = $type->className()->getQualifiedName();
-        \assert(\class_exists($className));
-
         try {
-            $class = new \ReflectionClass($className);
+            $class = new \ReflectionClass($type->className()->getQualifiedName());
             // @codeCoverageIgnoreStart
         } catch (\ReflectionException $e) {
             throw new RuntimeException(
@@ -159,7 +156,7 @@ final class CallableType extends Type
             [$className, $methodName] = $type->value();
         }
 
-        \assert(isset($className) && \is_string($className) && \class_exists($className));
+        \assert(isset($className) && \is_string($className));
         \assert(isset($methodName) && \is_string($methodName));
 
         try {

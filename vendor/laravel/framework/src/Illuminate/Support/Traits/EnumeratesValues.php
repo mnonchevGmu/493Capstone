@@ -30,7 +30,6 @@ use Traversable;
  * @property-read HigherOrderCollectionProxy $min
  * @property-read HigherOrderCollectionProxy $partition
  * @property-read HigherOrderCollectionProxy $reject
- * @property-read HigherOrderCollectionProxy $some
  * @property-read HigherOrderCollectionProxy $sortBy
  * @property-read HigherOrderCollectionProxy $sortByDesc
  * @property-read HigherOrderCollectionProxy $sum
@@ -405,7 +404,7 @@ trait EnumeratesValues
      *
      * @param  bool|mixed  $value
      * @param  callable  $callback
-     * @param  callable|null  $default
+     * @param  callable  $default
      * @return static|mixed
      */
     public function when($value, callable $callback, callable $default = null)
@@ -423,7 +422,7 @@ trait EnumeratesValues
      * Apply the callback if the collection is empty.
      *
      * @param  callable  $callback
-     * @param  callable|null  $default
+     * @param  callable  $default
      * @return static|mixed
      */
     public function whenEmpty(callable $callback, callable $default = null)
@@ -435,7 +434,7 @@ trait EnumeratesValues
      * Apply the callback if the collection is not empty.
      *
      * @param  callable  $callback
-     * @param  callable|null  $default
+     * @param  callable  $default
      * @return static|mixed
      */
     public function whenNotEmpty(callable $callback, callable $default = null)
@@ -448,7 +447,7 @@ trait EnumeratesValues
      *
      * @param  bool  $value
      * @param  callable  $callback
-     * @param  callable|null  $default
+     * @param  callable  $default
      * @return static|mixed
      */
     public function unless($value, callable $callback, callable $default = null)
@@ -460,7 +459,7 @@ trait EnumeratesValues
      * Apply the callback unless the collection is empty.
      *
      * @param  callable  $callback
-     * @param  callable|null  $default
+     * @param  callable  $default
      * @return static|mixed
      */
     public function unlessEmpty(callable $callback, callable $default = null)
@@ -472,7 +471,7 @@ trait EnumeratesValues
      * Apply the callback unless the collection is not empty.
      *
      * @param  callable  $callback
-     * @param  callable|null  $default
+     * @param  callable  $default
      * @return static|mixed
      */
     public function unlessNotEmpty(callable $callback, callable $default = null)

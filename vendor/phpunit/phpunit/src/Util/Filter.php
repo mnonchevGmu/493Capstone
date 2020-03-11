@@ -65,10 +65,7 @@ final class Filter
         return $filteredStacktrace;
     }
 
-    /**
-     * @param false|string $prefix
-     */
-    private static function shouldPrintFrame(array $frame, $prefix, Blacklist $blacklist): bool
+    private static function shouldPrintFrame($frame, $prefix, Blacklist $blacklist): bool
     {
         if (!isset($frame['file'])) {
             return false;
@@ -84,7 +81,7 @@ final class Filter
                $file !== $script;
     }
 
-    private static function fileIsBlacklisted(string $file, Blacklist $blacklist): bool
+    private static function fileIsBlacklisted($file, Blacklist $blacklist): bool
     {
         return (empty($GLOBALS['__PHPUNIT_ISOLATION_BLACKLIST']) ||
                 !\in_array($file, $GLOBALS['__PHPUNIT_ISOLATION_BLACKLIST'], true)) &&

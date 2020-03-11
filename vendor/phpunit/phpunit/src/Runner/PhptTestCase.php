@@ -20,8 +20,8 @@ use PHPUnit\Framework\SyntheticSkippedError;
 use PHPUnit\Framework\Test;
 use PHPUnit\Framework\TestResult;
 use PHPUnit\Util\PHP\AbstractPhpProcess;
+use SebastianBergmann\Template\Template;
 use SebastianBergmann\Timer\Timer;
-use Text_Template;
 use Throwable;
 
 /**
@@ -261,9 +261,9 @@ final class PhptTestCase implements SelfDescribing, Test
     /**
      * Parse --INI-- section key value pairs and return as array.
      *
-     * @param array|string
+     * @param array|string $content
      */
-    private function parseIniSection($content, $ini = []): array
+    private function parseIniSection($content, array $ini = []): array
     {
         if (\is_string($content)) {
             $content = \explode("\n", \trim($content));
@@ -556,7 +556,7 @@ final class PhptTestCase implements SelfDescribing, Test
     {
         $files = $this->getCoverageFiles();
 
-        $template = new Text_Template(
+        $template = new Template(
             __DIR__ . '/../Util/PHP/Template/PhptTestCase.tpl'
         );
 

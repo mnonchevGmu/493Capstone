@@ -10,16 +10,17 @@
 namespace PHPUnit\Util;
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\TextUI\Configuration\Generator;
 
 /**
  * @small
- * @covers \PHPUnit\Util\ConfigurationGenerator
+ * @covers \PHPUnit\TextUI\Configuration\Generator
  */
 final class ConfigurationGeneratorTest extends TestCase
 {
     public function testGeneratesConfigurationCorrectly(): void
     {
-        $generator = new ConfigurationGenerator;
+        $generator = new Generator;
 
         $this->assertEquals(
             '<?xml version="1.0" encoding="UTF-8"?>

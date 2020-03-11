@@ -14,14 +14,14 @@ class CreateCustomersTable extends Migration
     public function up()
     {
     	Schema::disableForeignKeyConstraints();
-        Schema::create('_customers', function (Blueprint $table) {
-            $table->bigIncrements('Customer_id');
+        Schema::create('CUSTOMERS', function (Blueprint $table) {
+            $table->bigIncrements('CUSTOMER_ID');
             $table->string('FIRST_NAME');
             $table->string('LAST_NAME');
             $table->string('EMAIL_ADDRESS');
             $table->string('PHONE_NUMBER');
-            $table->bigInteger('Phone_id')->unsigned();
-            $table->foreign('Phone_id')->references('Phone_id')->on('_phone_type');
+            $table->bigInteger('PHONE_ID')->unsigned();
+            $table->foreign('PHONE_ID')->references('PHONE_ID')->on('PHONE_TYPE');
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();
@@ -35,7 +35,7 @@ class CreateCustomersTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('_customers');
+        Schema::dropIfExists('CUSTOMERS');
         Schema::enableForeignKeyConstraints();
     }
 }

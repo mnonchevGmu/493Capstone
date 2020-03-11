@@ -13,12 +13,12 @@ class CreatePhoneTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('_phone_type', function (Blueprint $table) {
-       		$table->bigIncrements('Phone_id');
+        Schema::create('PHONE_TYPE', function (Blueprint $table) {
+       		$table->bigIncrements('PHONE_ID');
             $table->string('PHONE_TYPE');
             $table->string('PHONE_TYPE_DESCRIPTION');
-            $table->date('Creation_date');
-            $table->date('Last_update_date');
+            $table->date('CREATION_DATE');
+            $table->date('LAST_UPDATE_DATE');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreatePhoneTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_phone_type');
+        Schema::dropIfExists('PHONE_TYPE');
     }
 }

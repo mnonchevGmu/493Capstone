@@ -54,6 +54,7 @@ use SebastianBergmann\GlobalState\Blacklist;
 use SebastianBergmann\GlobalState\Restorer;
 use SebastianBergmann\GlobalState\Snapshot;
 use SebastianBergmann\ObjectEnumerator\Enumerator;
+use SebastianBergmann\Template\Template;
 
 abstract class TestCase extends Assert implements SelfDescribing, Test
 {
@@ -381,12 +382,11 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
     }
 
     /**
-     * @param string $name
      * @param string $dataName
      *
      * @internal This method is not covered by the backward compatibility promise for PHPUnit
      */
-    public function __construct($name = null, array $data = [], $dataName = '')
+    public function __construct(?string $name = null, array $data = [], $dataName = '')
     {
         if ($name !== null) {
             $this->setName($name);
@@ -480,6 +480,30 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
      */
     public function expectException(string $exception): void
     {
+        // @codeCoverageIgnoreStart
+        switch ($exception) {
+            case Deprecated::class:
+                $this->addWarning('Support for using expectException() with PHPUnit\Framework\Error\Deprecated is deprecated and will be removed in PHPUnit 10. Use expectDeprecation() instead.');
+
+            break;
+
+            case Error::class:
+                $this->addWarning('Support for using expectException() with PHPUnit\Framework\Error\Error is deprecated and will be removed in PHPUnit 10. Use expectError() instead.');
+
+            break;
+
+            case Notice::class:
+                $this->addWarning('Support for using expectException() with PHPUnit\Framework\Error\Notice is deprecated and will be removed in PHPUnit 10. Use expectNotice() instead.');
+
+            break;
+
+            case WarningError::class:
+                $this->addWarning('Support for using expectException() with PHPUnit\Framework\Error\Warning is deprecated and will be removed in PHPUnit 10. Use expectWarning() instead.');
+
+            break;
+        }
+        // @codeCoverageIgnoreEnd
+
         $this->expectedException = $exception;
     }
 
@@ -502,14 +526,6 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
     }
 
     /**
-     * @deprecated Use expectExceptionMessageMatches() instead
-     */
-    public function expectExceptionMessageRegExp(string $regularExpression): void
-    {
-        $this->expectExceptionMessageMatches($regularExpression);
-    }
-
-    /**
      * Sets up an expectation for an exception to be raised by the code under test.
      * Information for expected exception class, expected exception message, and
      * expected exception code are retrieved from a given Exception object.
@@ -528,7 +544,7 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
 
     public function expectDeprecation(): void
     {
-        $this->expectException(Deprecated::class);
+        $this->expectedException = Deprecated::class;
     }
 
     public function expectDeprecationMessage(string $message): void
@@ -538,12 +554,12 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
 
     public function expectDeprecationMessageMatches(string $regularExpression): void
     {
-        $this->expectExceptionMessageRegExp($regularExpression);
+        $this->expectExceptionMessageMatches($regularExpression);
     }
 
     public function expectNotice(): void
     {
-        $this->expectException(Notice::class);
+        $this->expectedException = Notice::class;
     }
 
     public function expectNoticeMessage(string $message): void
@@ -553,12 +569,12 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
 
     public function expectNoticeMessageMatches(string $regularExpression): void
     {
-        $this->expectExceptionMessageRegExp($regularExpression);
+        $this->expectExceptionMessageMatches($regularExpression);
     }
 
     public function expectWarning(): void
     {
-        $this->expectException(WarningError::class);
+        $this->expectedException = WarningError::class;
     }
 
     public function expectWarningMessage(string $message): void
@@ -568,12 +584,12 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
 
     public function expectWarningMessageMatches(string $regularExpression): void
     {
-        $this->expectExceptionMessageRegExp($regularExpression);
+        $this->expectExceptionMessageMatches($regularExpression);
     }
 
     public function expectError(): void
     {
-        $this->expectException(Error::class);
+        $this->expectedException = Error::class;
     }
 
     public function expectErrorMessage(string $message): void
@@ -583,7 +599,7 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
 
     public function expectErrorMessageMatches(string $regularExpression): void
     {
-        $this->expectExceptionMessageRegExp($regularExpression);
+        $this->expectExceptionMessageMatches($regularExpression);
     }
 
     public function getStatus(): int
@@ -653,11 +669,11 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
             // @codeCoverageIgnoreEnd
 
             if ($runEntireClass) {
-                $template = new \Text_Template(
+                $template = new Template(
                     __DIR__ . '/../Util/PHP/Template/TestCaseClass.tpl'
                 );
             } else {
-                $template = new \Text_Template(
+                $template = new Template(
                     __DIR__ . '/../Util/PHP/Template/TestCaseMethod.tpl'
                 );
             }
@@ -764,18 +780,12 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
     /**
      * Returns a builder object to create mock objects using a fluent interface.
      *
-     * @param string|string[] $className
-     *
      * @psalm-template RealInstanceType of object
-     * @psalm-param class-string<RealInstanceType>|string[] $className
+     * @psalm-param class-string<RealInstanceType> $className
      * @psalm-return MockBuilder<RealInstanceType>
      */
-    public function getMockBuilder($className): MockBuilder
+    public function getMockBuilder(string $className): MockBuilder
     {
-        if (!\is_string($className)) {
-            $this->addWarning('Passing an array of interface names to getMockBuilder() for creating a test double that implements multiple interfaces is deprecated and will no longer be supported in PHPUnit 9.');
-        }
-
         $this->recordDoubledType($className);
 
         return new MockBuilder($this, $className);
@@ -786,15 +796,6 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
         ComparatorFactory::getInstance()->register($comparator);
 
         $this->customComparators[] = $comparator;
-    }
-
-    /**
-     * @internal This method is not covered by the backward compatibility promise for PHPUnit
-     *
-     * @deprecated Invoking this method has no effect; it will be removed in PHPUnit 9
-     */
-    public function setUseErrorHandler(bool $useErrorHandler): void
-    {
     }
 
     /**
@@ -1017,7 +1018,6 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
                 }
             }
 
-            $this->setExpectedExceptionFromAnnotation();
             $this->setDoesNotPerformAssertionsFromAnnotation();
 
             foreach ($hookMethods['before'] as $method) {
@@ -1567,18 +1567,12 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
     /**
      * Returns a mock object for the specified class.
      *
-     * @param string|string[] $originalClassName
-     *
      * @psalm-template RealInstanceType of object
-     * @psalm-param class-string<RealInstanceType>|string[] $originalClassName
+     * @psalm-param class-string<RealInstanceType> $originalClassName
      * @psalm-return MockObject&RealInstanceType
      */
-    protected function createMock($originalClassName): MockObject
+    protected function createMock(string $originalClassName): MockObject
     {
-        if (!\is_string($originalClassName)) {
-            $this->addWarning('Passing an array of interface names to createMock() for creating a test double that implements multiple interfaces is deprecated and will no longer be supported in PHPUnit 9.');
-        }
-
         return $this->getMockBuilder($originalClassName)
                     ->disableOriginalConstructor()
                     ->disableOriginalClone()
@@ -1590,13 +1584,11 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
     /**
      * Returns a configured mock object for the specified class.
      *
-     * @param string|string[] $originalClassName
-     *
      * @psalm-template RealInstanceType of object
-     * @psalm-param class-string<RealInstanceType>|string[] $originalClassName
+     * @psalm-param class-string<RealInstanceType> $originalClassName
      * @psalm-return MockObject&RealInstanceType
      */
-    protected function createConfiguredMock($originalClassName, array $configuration): MockObject
+    protected function createConfiguredMock(string $originalClassName, array $configuration): MockObject
     {
         $o = $this->createMock($originalClassName);
 
@@ -1610,40 +1602,41 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
     /**
      * Returns a partial mock object for the specified class.
      *
-     * @param string|string[] $originalClassName
-     * @param string[]        $methods
+     * @param string[] $methods
      *
      * @psalm-template RealInstanceType of object
-     * @psalm-param class-string<RealInstanceType>|string[] $originalClassName
+     * @psalm-param class-string<RealInstanceType> $originalClassName
      * @psalm-return MockObject&RealInstanceType
      */
-    protected function createPartialMock($originalClassName, array $methods): MockObject
+    protected function createPartialMock(string $originalClassName, array $methods): MockObject
     {
-        if (!\is_string($originalClassName)) {
-            $this->addWarning('Passing an array of interface names to createPartialMock() for creating a test double that implements multiple interfaces is deprecated and will no longer be supported in PHPUnit 9.');
-        }
-
-        $class_names = \is_array($originalClassName) ? $originalClassName : [$originalClassName];
-
-        foreach ($class_names as $class_name) {
-            $reflection = new \ReflectionClass($class_name);
-
-            $mockedMethodsThatDontExist = \array_filter(
-                $methods,
-                static function (string $method) use ($reflection) {
-                    return !$reflection->hasMethod($method);
-                }
+        try {
+            $reflector = new \ReflectionClass($originalClassName);
+            // @codeCoverageIgnoreStart
+        } catch (\ReflectionException $e) {
+            throw new Exception(
+                $e->getMessage(),
+                (int) $e->getCode(),
+                $e
             );
+        }
+        // @codeCoverageIgnoreEnd
 
-            if ($mockedMethodsThatDontExist) {
-                $this->addWarning(
-                    \sprintf(
-                        'createPartialMock called with method(s) %s that do not exist in %s. This will not be allowed in future versions of PHPUnit.',
-                        \implode(', ', $mockedMethodsThatDontExist),
-                        $class_name
-                    )
-                );
+        $mockedMethodsThatDontExist = \array_filter(
+            $methods,
+            static function (string $method) use ($reflector) {
+                return !$reflector->hasMethod($method);
             }
+        );
+
+        if ($mockedMethodsThatDontExist) {
+            $this->addWarning(
+                \sprintf(
+                    'createPartialMock() called with method(s) %s that do not exist in %s. This will not be allowed in future versions of PHPUnit.',
+                    \implode(', ', $mockedMethodsThatDontExist),
+                    $originalClassName
+                )
+            );
         }
 
         return $this->getMockBuilder($originalClassName)
@@ -1899,37 +1892,6 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
     protected function onNotSuccessfulTest(\Throwable $t): void
     {
         throw $t;
-    }
-
-    private function setExpectedExceptionFromAnnotation(): void
-    {
-        if ($this->name === null) {
-            return;
-        }
-
-        try {
-            $expectedException = TestUtil::getExpectedException(
-                \get_class($this),
-                $this->name
-            );
-
-            if ($expectedException !== false) {
-                $this->addWarning('The @expectedException, @expectedExceptionCode, @expectedExceptionMessage, and @expectedExceptionMessageRegExp annotations are deprecated. They will be removed in PHPUnit 9. Refactor your test to use expectException(), expectExceptionCode(), expectExceptionMessage(), or expectExceptionMessageRegExp() instead.');
-
-                $this->expectException($expectedException['class']);
-
-                if ($expectedException['code'] !== null) {
-                    $this->expectExceptionCode($expectedException['code']);
-                }
-
-                if ($expectedException['message'] !== '') {
-                    $this->expectExceptionMessage($expectedException['message']);
-                } elseif ($expectedException['message_regex'] !== '') {
-                    $this->expectExceptionMessageRegExp($expectedException['message_regex']);
-                }
-            }
-        } catch (UtilException $e) {
-        }
     }
 
     /**
@@ -2241,10 +2203,10 @@ abstract class TestCase extends Assert implements SelfDescribing, Test
             $blacklist->addClassNamePrefix('SebastianBergmann\CodeCoverage');
             $blacklist->addClassNamePrefix('SebastianBergmann\FileIterator');
             $blacklist->addClassNamePrefix('SebastianBergmann\Invoker');
+            $blacklist->addClassNamePrefix('SebastianBergmann\Template');
             $blacklist->addClassNamePrefix('SebastianBergmann\Timer');
             $blacklist->addClassNamePrefix('PHP_Token');
             $blacklist->addClassNamePrefix('Symfony');
-            $blacklist->addClassNamePrefix('Text_Template');
             $blacklist->addClassNamePrefix('Doctrine\Instantiator');
             $blacklist->addClassNamePrefix('Prophecy');
 

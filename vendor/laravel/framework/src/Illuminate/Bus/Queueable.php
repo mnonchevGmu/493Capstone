@@ -2,6 +2,9 @@
 
 namespace Illuminate\Bus;
 
+use Closure;
+use Illuminate\Queue\CallQueuedClosure;
+use Illuminate\Queue\SerializableClosure;
 use Illuminate\Support\Arr;
 
 trait Queueable
@@ -121,16 +124,6 @@ trait Queueable
     }
 
     /**
-     * Get the middleware the job should be dispatched through.
-     *
-     * @return array
-     */
-    public function middleware()
-    {
-        return [];
-    }
-
-    /**
      * Specify the middleware the job should be dispatched through.
      *
      * @param  array|object  $middleware
@@ -152,7 +145,11 @@ trait Queueable
     public function chain($chain)
     {
         $this->chained = collect($chain)->map(function ($job) {
-            return serialize($job);
+            return serialize(
+                $job instanceof Closure
+                            ? new CallQueuedClosure(new SerializableClosure($job))
+                            : $job
+            );
         })->all();
 
         return $this;

@@ -138,11 +138,12 @@ class CacheManager implements FactoryContract
     /**
      * Create an instance of the array cache driver.
      *
+     * @param  array  $config
      * @return \Illuminate\Cache\Repository
      */
-    protected function createArrayDriver()
+    protected function createArrayDriver(array $config)
     {
-        return $this->repository(new ArrayStore);
+        return $this->repository(new ArrayStore($config['serialize'] ?? false));
     }
 
     /**
@@ -153,7 +154,7 @@ class CacheManager implements FactoryContract
      */
     protected function createFileDriver(array $config)
     {
-        return $this->repository(new FileStore($this->app['files'], $config['path']));
+        return $this->repository(new FileStore($this->app['files'], $config['path'], $config['permission'] ?? null));
     }
 
     /**

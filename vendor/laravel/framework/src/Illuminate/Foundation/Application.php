@@ -5,6 +5,8 @@ namespace Illuminate\Foundation;
 use Closure;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
+use Illuminate\Contracts\Foundation\CachesConfiguration;
+use Illuminate\Contracts\Foundation\CachesRoutes;
 use Illuminate\Contracts\Http\Kernel as HttpKernelContract;
 use Illuminate\Events\EventServiceProvider;
 use Illuminate\Filesystem\Filesystem;
@@ -24,14 +26,14 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class Application extends Container implements ApplicationContract, HttpKernelInterface
+class Application extends Container implements ApplicationContract, CachesConfiguration, CachesRoutes, HttpKernelInterface
 {
     /**
      * The Laravel framework version.
      *
      * @var string
      */
-    const VERSION = '6.16.0';
+    const VERSION = '7.1.0';
 
     /**
      * The base path for the Laravel installation.
@@ -759,27 +761,47 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * Resolve the given type from the container.
      *
-     * (Overriding Container::make)
-     *
      * @param  string  $abstract
      * @param  array  $parameters
      * @return mixed
      */
     public function make($abstract, array $parameters = [])
     {
-        $abstract = $this->getAlias($abstract);
-
-        if ($this->isDeferredService($abstract) && ! isset($this->instances[$abstract])) {
-            $this->loadDeferredProvider($abstract);
-        }
+        $this->loadDeferredProviderIfNeeded($abstract = $this->getAlias($abstract));
 
         return parent::make($abstract, $parameters);
     }
 
     /**
-     * Determine if the given abstract type has been bound.
+     * Resolve the given type from the container.
      *
-     * (Overriding Container::bound)
+     * @param  string  $abstract
+     * @param  array  $parameters
+     * @param  bool  $raiseEvents
+     * @return mixed
+     */
+    protected function resolve($abstract, $parameters = [], $raiseEvents = true)
+    {
+        $this->loadDeferredProviderIfNeeded($abstract = $this->getAlias($abstract));
+
+        return parent::resolve($abstract, $parameters, $raiseEvents);
+    }
+
+    /**
+     * Load the deferred provider if the given type is a deferred service and the instance has not been loaded.
+     *
+     * @param  string  $abstract
+     * @return void
+     */
+    protected function loadDeferredProviderIfNeeded($abstract)
+    {
+        if ($this->isDeferredService($abstract) && ! isset($this->instances[$abstract])) {
+            $this->loadDeferredProvider($abstract);
+        }
+    }
+
+    /**
+     * Determine if the given abstract type has been bound.
      *
      * @param  string  $abstract
      * @return bool
@@ -879,7 +901,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * {@inheritdoc}
      */
-    public function handle(SymfonyRequest $request, $type = self::MASTER_REQUEST, $catch = true)
+    public function handle(SymfonyRequest $request, int $type = self::MASTER_REQUEST, bool $catch = true)
     {
         return $this[HttpKernelContract::class]->handle(Request::createFromBase($request));
     }
@@ -952,7 +974,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      */
     public function getCachedRoutesPath()
     {
-        return $this->normalizeCachePath('APP_ROUTES_CACHE', 'cache/routes.php');
+        return $this->normalizeCachePath('APP_ROUTES_CACHE', 'cache/routes-v7.php');
     }
 
     /**
@@ -1177,6 +1199,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
             'hash.driver'          => [\Illuminate\Contracts\Hashing\Hasher::class],
             'translator'           => [\Illuminate\Translation\Translator::class, \Illuminate\Contracts\Translation\Translator::class],
             'log'                  => [\Illuminate\Log\LogManager::class, \Psr\Log\LoggerInterface::class],
+            'mail.manager'         => [\Illuminate\Mail\MailManager::class, \Illuminate\Contracts\Mail\Factory::class],
             'mailer'               => [\Illuminate\Mail\Mailer::class, \Illuminate\Contracts\Mail\Mailer::class, \Illuminate\Contracts\Mail\MailQueue::class],
             'auth.password'        => [\Illuminate\Auth\Passwords\PasswordBrokerManager::class, \Illuminate\Contracts\Auth\PasswordBrokerFactory::class],
             'auth.password.broker' => [\Illuminate\Auth\Passwords\PasswordBroker::class, \Illuminate\Contracts\Auth\PasswordBroker::class],

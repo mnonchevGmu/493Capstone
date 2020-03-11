@@ -11,6 +11,9 @@ npm-debug.log
 yarn-error.log
 .DS_Store
 .composer
+HEAD
 composer*
 
 /vendor/
+composer
+f0422190e7703b6a19cc8f8a12b01fc4f7266fc6

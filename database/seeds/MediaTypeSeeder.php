@@ -3,7 +3,7 @@
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
-class PhoneTypeSeeder extends Seeder
+class MediaTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,34 +12,33 @@ class PhoneTypeSeeder extends Seeder
      */
     public function run()
     {
-
+        //
         // Date and time of creation
         $currenttime =Carbon::now();
-        // Insert CEll type       
-        DB::table('PHONE_TYPE_LOV')->insert([
-            'PHONE_TYPE' => 'CELL',
-            'PHONE_TYPE_DESCRIPTION' => 'Cell Phone',
+        // Insert VIDEO type       
+        DB::table('MEDIA_TYPE_LOV')->insert([
+            'MEDIA_TYPE' => 'VIDEO',
+            'MEDIA_TYPE_DESCRIPTION' => 'Video Only',
             'CREATION_DATE' => $currenttime,
             'LAST_UPDATE_DATE' => $currenttime
         ]);
 
-        // Insert HOME type       
-        DB::table('PHONE_TYPE_LOV')->insert([
-            'PHONE_TYPE' => 'HOME',
-            'PHONE_TYPE_DESCRIPTION' => 'Home Phone',
+        // Insert PHOTO type       
+        DB::table('MEDIA_TYPE_LOV')->insert([
+            'MEDIA_TYPE' => 'PHOTOS',
+            'MEDIA_TYPE_DESCRIPTION' => 'Photos Only',
+            'CREATION_DATE' => $currenttime,
+            'LAST_UPDATE_DATE' => $currenttime
+        ]);
+
+        // Insert VIDEO AND STILLS type       
+        DB::table('MEDIA_TYPE_LOV')->insert([
+            'MEDIA_TYPE' => 'VIDEO+PHOTOS',
+            'MEDIA_TYPE_DESCRIPTION' => 'Video and Photos',
             'CREATION_DATE' => $currenttime,
             'LAST_UPDATE_DATE' => $currenttime
         ]);
 
         
-        // Insert WORK type       
-        DB::table('PHONE_TYPE_LOV')->insert([
-            'PHONE_TYPE' => 'WORK',
-            'PHONE_TYPE_DESCRIPTION' => 'Work Phone',
-            'CREATION_DATE' => $currenttime,
-            'LAST_UPDATE_DATE' => $currenttime
-        ]);
-
-       
     }
 }

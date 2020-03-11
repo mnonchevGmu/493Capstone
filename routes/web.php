@@ -11,6 +11,28 @@
 |
 */
 
+/*
+--------------------------------------------------------------------
+Controllers 
+-------------------------------------------------------------------- 
+Here the routes can retrieve the conrollers for specific functions to run.
+It would connect each controller to a specific part of the website. 
+The only one I haven't put anything in for is the "/dopost" because the
+website is not loading.
+___________________________________________________________________
+
+Route::get'/new', 'LoginController@_construct');  
+Route::get'/new', 'ConfirmPasswordController@_construct');
+Route::get'/new', 'RegisterController@_construct');
+Route::get'/new', 'VerificationController@_construct');
+Route::get'/returning, 'ConfirmPasswordController@_construct');
+Route::get'/returning, 'LoginController@_construct');
+Route::get'/returning, 'VerificationController@_construct');
+Route::get'/thanks, 'LoginController@_construct');
+Route::get'/thanks, 'RegisterController@_construct');
+Route::get'/testform, 'RegisterController@_construct;
+*/
+
 Route::get('/', function () {
     return view('welcome');
 });

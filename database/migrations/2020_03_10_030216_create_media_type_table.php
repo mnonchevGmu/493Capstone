@@ -13,8 +13,8 @@ class CreateMediaTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('_media_type', function (Blueprint $table) {
-            $table->bigIncrements('media_id');
+        Schema::create('MEDIA_TYPE', function (Blueprint $table) {
+            $table->bigIncrements('MEDIA_ID');
             $table->string('MEDIA_TYPE');
             $table->string('MEDIA_TYPE_DESCRIPTION');
             $table->date('CREATION_DATE');
@@ -30,6 +30,6 @@ class CreateMediaTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_media_type');
+        Schema::dropIfExists('MEDIA_TYPE');
     }
 }

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit3b053d1393ca7c3621a191e87d56b500
+class ComposerStaticInitcff4d62d60fb9e65fb09d9bd5c7a754e
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -474,6 +474,7 @@ class ComposerStaticInit3b053d1393ca7c3621a191e87d56b500
         'Cron\\HoursField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
+        'CustomersTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CustomersTableSeeder.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
         'DeepCopy\\Exception\\CloneException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
@@ -4432,6 +4433,7 @@ class ComposerStaticInit3b053d1393ca7c3621a191e87d56b500
         'phpDocumentor\\Reflection\\Types\\Array_' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Array_.php',
         'phpDocumentor\\Reflection\\Types\\Boolean' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Boolean.php',
         'phpDocumentor\\Reflection\\Types\\Callable_' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Callable_.php',
+        'phpDocumentor\\Reflection\\Types\\ClassString' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/ClassString.php',
         'phpDocumentor\\Reflection\\Types\\Collection' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Collection.php',
         'phpDocumentor\\Reflection\\Types\\Compound' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Compound.php',
         'phpDocumentor\\Reflection\\Types\\Context' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Context.php',
@@ -4456,10 +4458,10 @@ class ComposerStaticInit3b053d1393ca7c3621a191e87d56b500
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit3b053d1393ca7c3621a191e87d56b500::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit3b053d1393ca7c3621a191e87d56b500::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit3b053d1393ca7c3621a191e87d56b500::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit3b053d1393ca7c3621a191e87d56b500::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitcff4d62d60fb9e65fb09d9bd5c7a754e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitcff4d62d60fb9e65fb09d9bd5c7a754e::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitcff4d62d60fb9e65fb09d9bd5c7a754e::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitcff4d62d60fb9e65fb09d9bd5c7a754e::$classMap;
 
         }, null, ClassLoader::class);
     }

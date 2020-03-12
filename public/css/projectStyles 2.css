@@ -1,0 +1,342 @@
+html{
+	box-sizing:border-box;
+}
+*, *:before, *:after{
+	box-sizing:inherit;
+}
+
+
+/*Styles for the footer bar for the background color, text color, margin, and border*/
+#footerBar p{
+	color: #fff;
+	text-align:center;
+	margin: 0;
+}
+
+  #footerBar {
+	height: 60px;
+	text-align: center;
+	background-color: darkgray;
+	border-top: 2px solid #000;
+  }
+
+/*Styles for the footer bar for the width of the banner image*/
+
+#bannerImg{
+	width:100%;
+}
+
+/*Styles for the media price table to reflect the border style, color, radius, and background color*/
+#mediaPriceTable, #mediaPriceOutsideBorder{
+	border-style:solid;
+	border-color:lightgray;
+}
+
+
+#mediaTableDiv{
+	border-style:solid;
+	border-color:#000;
+	border-radius:25px;
+	background-color:#fff;
+	margin:25px;
+	padding: 25px;
+	box-align:center;
+	
+}
+
+/*Styles for the unordered lists*/
+.skydiveTypesListItem:before {
+	content: "\003e";
+	font-size: 12px;
+	float:left;
+	margin-top: 4px;
+	margin-left: -10px;
+	margin-right: 10px;
+	color: green;
+}
+
+.border-width-3 {
+	border-width:3px !important;
+}
+
+/*Styles for the background color*/
+.bg-mediumgrey {
+	background-color: #cecece
+}
+
+/*Styles for the various borders (around legend tags)*/
+legend.email-border {
+	width:inherit; 
+	padding:0 10px; 
+	border-bottom:none;
+}
+
+legend.mediaType-border {
+	width:inherit; 
+	padding:0 10px; 
+	border-bottom:none;
+}
+
+legend.mediaFormat-border{
+	width:inherit; 
+	padding:0 10px; 
+	border-bottom:none;
+
+}
+
+/*Styles to add bold to the initial letter in the frequently asked questions*/
+.InitLetterBold{
+	font-weight:bold;
+	font-size: 150%;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+/*Styles for the different columns and their background colors*/
+.col1color{
+	background-color:#aaa;
+}
+.col2color{
+	background-color:#bbb;
+}
+
+/*Styles for the images and their positioning*/
+.span4 .img-left{
+	float: left;
+}
+
+.span4 .img-right{
+	float:right;
+}
+
+/*Styles for the unordered list of the different manufacturers*/
+.mfgItems:before {
+		content: "\003e";
+		font-size: 12px;
+		float:left;
+		margin-top: 4px;
+		margin-left: -10px;
+		margin-right: 10px;
+		color: green;
+	
+	}
+
+
+
+
+
+
+
+.navBtns{
+	color:black;
+}
+
+
+.welcomeText{
+	margin: 4px 0px 8px 0px;
+}
+
+
+
+
+/*Styles for the rigger detail header*/
+#riggerDetailHeader {
+	background-color: #fff;
+	text-align:center;
+
+}
+
+	
+.error {
+	color: #a94442;
+	padding:1px 20px 1px 20px;
+  }
+
+/*styling to set the background color of the autocomplete*/
+.ui-autocomplete {
+    background-color: inherit;
+}
+
+/*styling to set the font size of the title*/
+#titleText{
+	display:none;
+	font-size: 2.2rem;
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	letter-spacing: 0.08em;
+}
+
+.titleSpan {
+	background-color:inherit;
+}
+
+/*styling to center the title*/
+#title{
+	align-content: center;
+	text-align: center;
+}
+
+/* ABOVE THIS LINE IS THE FORM STYLING */
+
+
+/*Cut and paste from welcome.blade*/
+ html, body {
+                background-color: #fff;
+                color: #636b6f;
+                font-family: 'Nunito', sans-serif;
+                font-weight: 200;
+                height: 100vh;
+                margin: 0;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 84px;
+}
+
+
+
+
+.m-b-md {
+    margin-bottom: 90px;
+}
+
+
+
+
+
+/*Cut and paste from welcome.blade*/
+ html, body {
+                background-color: rgb(0, 0, 0);
+                color: #000000;
+                font-family: 'Nunito', sans-serif;
+                font-weight: 200;
+                height: 100vh;
+                margin: 0;
+}
+
+/*welcome page title*/
+.welcomeTitle {
+    font-size: 60px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+}
+
+.bg-black{
+  background-color: rgb(0, 0, 0);
+  color: #ffffff;
+}
+
+/*styling for the welcome page links*/
+.links, .links:visited{
+    color: rgb(255, 217, 0);
+    padding: 0 25px;
+    font-size: 50px;
+    font-weight: 400;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Nunito', sans-serif;
+}
+
+.links:hover{
+  color: rgb(255, 111, 0);
+}
+
+.formLink{
+  color: blue;
+}
+
+
+.bgimgsimple{
+      /* Background image */
+      background-image: url("/images/welcomeBackground.jpg");
+      /* Full-screen */
+      height: 100%;
+      width:100%;
+      /* Center the background image */
+      background-position: center;
+      /* Scale and zoom in the image */
+      background-size: cover;
+      color:white;
+      font-size: 50px;
+ 
+}
+.bgimg {
+    /* Background image */
+    background-image: url("/images/welcomeBackground.jpg");
+    /* Full-screen */
+    height: 100%;
+    /* Center the background image */
+    background-position: center;
+    /* Scale and zoom in the image */
+    background-size: cover;
+    /* Add position: relative to enable absolutely positioned elements inside the image (place text) */
+    position: relative;
+    /* Add a white text color to all elements inside the .bgimg container */
+    /*color: white;*/
+    /* Add a font */
+    font-family: "Courier, arial, helvetica";
+    /* Set the font-size to 25 pixels */
+    font-size: 50px;
+    
+  }
+  /*Darken the background-image*/
+  .blankarea {
+ /*   position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+ */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(101, 100, 100, 0.4);
+  }
+
+  
+/*Styling for the dependent checkbox: need to fix*/
+.reveal-if-active {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: scale(0.8);
+  transition: 0.5s;
+}
+
+input[type="radio"]:checked ~ .reveal-if-active,
+input[type="checkbox"]:checked ~ .reveal-if-active {
+  opacity: 1;
+  max-height: 100px; /* little bit of a magic number :( */
+  overflow: visible;
+  padding: 10px 20px;
+  transform: scale(1);
+}
+
+input[type = "radio"]{
+	padding: 10px 10px 10px 10px;
+}
+
+
+

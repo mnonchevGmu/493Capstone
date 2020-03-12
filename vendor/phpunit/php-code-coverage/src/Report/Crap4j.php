@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 /*
- * This file is part of phpunit/php-code-coverage.
+ * This file is part of the php-code-coverage package.
  *
  * (c) Sebastian Bergmann <sebastian@phpunit.de>
  *
@@ -65,7 +65,7 @@ final class Crap4j
 
             foreach ($classes as $className => $class) {
                 foreach ($class['methods'] as $methodName => $method) {
-                    $crapLoad = $this->getCrapLoad((float) $method['crap'], $method['ccn'], $method['coverage']);
+                    $crapLoad = $this->getCrapLoad($method['crap'], $method['ccn'], $method['coverage']);
 
                     $fullCrap += $method['crap'];
                     $fullCrapLoad += $crapLoad;
@@ -86,7 +86,7 @@ final class Crap4j
                     $methodNode->appendChild($document->createElement('methodName', $methodName));
                     $methodNode->appendChild($document->createElement('methodSignature', \htmlspecialchars($method['signature'])));
                     $methodNode->appendChild($document->createElement('fullMethod', \htmlspecialchars($method['signature'])));
-                    $methodNode->appendChild($document->createElement('crap', (string) $this->roundValue((float) $method['crap'])));
+                    $methodNode->appendChild($document->createElement('crap', (string) $this->roundValue($method['crap'])));
                     $methodNode->appendChild($document->createElement('complexity', (string) $method['ccn']));
                     $methodNode->appendChild($document->createElement('coverage', (string) $this->roundValue($method['coverage'])));
                     $methodNode->appendChild($document->createElement('crapLoad', (string) \round($crapLoad)));
@@ -133,7 +133,12 @@ final class Crap4j
         return $buffer;
     }
 
-    private function getCrapLoad(float $crapValue, int $cyclomaticComplexity, float $coveragePercent): float
+    /**
+     * @param float $crapValue
+     * @param int   $cyclomaticComplexity
+     * @param float $coveragePercent
+     */
+    private function getCrapLoad($crapValue, $cyclomaticComplexity, $coveragePercent): float
     {
         $crapLoad = 0;
 
@@ -145,7 +150,10 @@ final class Crap4j
         return $crapLoad;
     }
 
-    private function roundValue(float $value): float
+    /**
+     * @param float $value
+     */
+    private function roundValue($value): float
     {
         return \round($value, 2);
     }

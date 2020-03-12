@@ -34,15 +34,7 @@ class ImplicitRouteBinding
 
             $instance = $container->make($parameter->getClass()->name);
 
-            $parent = $route->parentOfParameter($parameterName);
-
-            if ($parent instanceof UrlRoutable && $route->bindingFieldFor($parameterName)) {
-                if (! $model = $parent->resolveChildRouteBinding(
-                    $parameterName, $parameterValue, $route->bindingFieldFor($parameterName)
-                )) {
-                    throw (new ModelNotFoundException)->setModel(get_class($instance), [$parameterValue]);
-                }
-            } elseif (! $model = $instance->resolveRouteBinding($parameterValue, $route->bindingFieldFor($parameterName))) {
+            if (! $model = $instance->resolveRouteBinding($parameterValue)) {
                 throw (new ModelNotFoundException)->setModel(get_class($instance), [$parameterValue]);
             }
 

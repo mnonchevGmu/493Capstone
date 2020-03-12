@@ -30,7 +30,7 @@ final class NamePrettifier
      */
     private $useColor;
 
-    public function __construct(bool $useColor = false)
+    public function __construct($useColor = false)
     {
         $this->useColor = $useColor;
     }

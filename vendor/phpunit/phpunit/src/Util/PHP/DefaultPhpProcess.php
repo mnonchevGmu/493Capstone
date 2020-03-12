@@ -144,7 +144,7 @@ class DefaultPhpProcess extends AbstractPhpProcess
 
                         $line = \fread($pipe, 8192);
 
-                        if ($line === '' || $line === false) {
+                        if ($line === '') {
                             \fclose($pipes[$pipeOffset]);
 
                             unset($pipes[$pipeOffset]);
@@ -197,9 +197,6 @@ class DefaultPhpProcess extends AbstractPhpProcess
         return ['stdout' => $stdout, 'stderr' => $stderr];
     }
 
-    /**
-     * @param resource $pipe
-     */
     protected function process($pipe, string $job): void
     {
         \fwrite($pipe, $job);

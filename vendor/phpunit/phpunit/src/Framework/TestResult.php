@@ -659,12 +659,10 @@ final class TestResult implements Countable
         Timer::start();
 
         try {
-            $invoker = new Invoker;
-
             if (!$test instanceof WarningTestCase &&
                 $this->enforceTimeLimit &&
                 ($this->defaultTimeLimit || $test->getSize() != \PHPUnit\Util\Test::UNKNOWN) &&
-                $invoker->canInvokeWithTimeout()) {
+                \extension_loaded('pcntl') && \class_exists(Invoker::class)) {
                 switch ($test->getSize()) {
                     case \PHPUnit\Util\Test::SMALL:
                         $_timeout = $this->timeoutForSmallTests;
@@ -687,6 +685,7 @@ final class TestResult implements Countable
                         break;
                 }
 
+                $invoker = new Invoker;
                 $invoker->invoke([$test, 'runBare'], [], $_timeout);
             } else {
                 $test->runBare();

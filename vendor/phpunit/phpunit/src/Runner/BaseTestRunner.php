@@ -81,30 +81,24 @@ abstract class BaseTestRunner
      *
      * @throws Exception
      */
-    public function getTest(string $suiteClassFile, $suffixes = ''): ?Test
+    public function getTest(string $suiteClassName, string $suiteClassFile = '', $suffixes = ''): ?Test
     {
-        if (\is_dir($suiteClassFile)) {
+        if (empty($suiteClassFile) && \is_dir($suiteClassName) && !\is_file($suiteClassName . '.php')) {
             /** @var string[] $files */
             $files = (new FileIteratorFacade)->getFilesAsArray(
-                $suiteClassFile,
+                $suiteClassName,
                 $suffixes
             );
 
-            $suite = new TestSuite($suiteClassFile);
+            $suite = new TestSuite($suiteClassName);
             $suite->addTestFiles($files);
-
-            return $suite;
-        }
-
-        if (\is_file($suiteClassFile) && \substr($suiteClassFile, -5, 5) === '.phpt') {
-            $suite = new TestSuite;
-            $suite->addTestFile($suiteClassFile);
 
             return $suite;
         }
 
         try {
             $testClass = $this->loadSuiteClass(
+                $suiteClassName,
                 $suiteClassFile
             );
         } catch (Exception $e) {
@@ -126,7 +120,12 @@ abstract class BaseTestRunner
 
             $test = $suiteMethod->invoke(null, $testClass->getName());
         } catch (\ReflectionException $e) {
-            $test = new TestSuite($testClass);
+            try {
+                $test = new TestSuite($testClass);
+            } catch (Exception $e) {
+                $test = new TestSuite;
+                $test->setName($suiteClassName);
+            }
         }
 
         $this->clearStatus();
@@ -137,9 +136,9 @@ abstract class BaseTestRunner
     /**
      * Returns the loaded ReflectionClass for a suite name.
      */
-    protected function loadSuiteClass(string $suiteClassFile): \ReflectionClass
+    protected function loadSuiteClass(string $suiteClassName, string $suiteClassFile = ''): \ReflectionClass
     {
-        return $this->getLoader()->load($suiteClassFile);
+        return $this->getLoader()->load($suiteClassName, $suiteClassFile);
     }
 
     /**

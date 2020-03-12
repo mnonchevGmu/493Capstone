@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 /*
- * This file is part of phpunit/php-code-coverage.
+ * This file is part of the php-code-coverage package.
  *
  * (c) Sebastian Bergmann <sebastian@phpunit.de>
  *
@@ -11,7 +11,6 @@ namespace SebastianBergmann\CodeCoverage\Report\Html;
 
 use SebastianBergmann\CodeCoverage\Node\AbstractNode as Node;
 use SebastianBergmann\CodeCoverage\Node\Directory as DirectoryNode;
-use SebastianBergmann\Template\Template;
 
 /**
  * Renders a directory node.
@@ -24,7 +23,7 @@ final class Directory extends Renderer
      */
     public function render(DirectoryNode $node, string $file): void
     {
-        $template = new Template($this->templatePath . 'directory.html', '{{', '}}');
+        $template = new \Text_Template($this->templatePath . 'directory.html', '{{', '}}');
 
         $this->setCommonTemplateVariables($template, $node);
 
@@ -92,7 +91,7 @@ final class Directory extends Renderer
         }
 
         return $this->renderItemTemplate(
-            new Template($this->templatePath . 'directory_item.html', '{{', '}}'),
+            new \Text_Template($this->templatePath . 'directory_item.html', '{{', '}}'),
             $data
         );
     }

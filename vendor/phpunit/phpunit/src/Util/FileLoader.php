@@ -30,12 +30,15 @@ final class FileLoader
     {
         $includePathFilename = \stream_resolve_include_path($filename);
 
+        if (!$includePathFilename) {
+            throw new Exception(
+                \sprintf('Cannot open file "%s".' . "\n", $filename)
+            );
+        }
+
         $localFile = __DIR__ . \DIRECTORY_SEPARATOR . $filename;
 
-        if (!$includePathFilename ||
-            $includePathFilename === $localFile ||
-            !self::isReadable($includePathFilename)
-        ) {
+        if ($includePathFilename === $localFile || !self::isReadable($includePathFilename)) {
             throw new Exception(
                 \sprintf('Cannot open file "%s".' . "\n", $filename)
             );

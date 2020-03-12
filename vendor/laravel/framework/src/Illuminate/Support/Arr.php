@@ -535,7 +535,7 @@ class Arr
      * If no key is given to the method, the entire array will be replaced.
      *
      * @param  array  $array
-     * @param  string|null  $key
+     * @param  string  $key
      * @param  mixed  $value
      * @return array
      */

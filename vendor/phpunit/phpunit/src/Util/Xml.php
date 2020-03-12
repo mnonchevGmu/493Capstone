@@ -219,8 +219,6 @@ final class Xml
                     }
 
                     try {
-                        \assert(\class_exists($className));
-
                         $variable = (new \ReflectionClass($className))->newInstanceArgs($constructorArgs);
                         // @codeCoverageIgnoreStart
                     } catch (\ReflectionException $e) {

@@ -173,19 +173,11 @@ abstract class GeneratorCommand extends Command
      */
     protected function replaceNamespace(&$stub, $name)
     {
-        $searches = [
+        $stub = str_replace(
             ['DummyNamespace', 'DummyRootNamespace', 'NamespacedDummyUserModel'],
-            ['{{ namespace }}', '{{ rootNamespace }}', '{{ namespacedUserModel }}'],
-            ['{{namespace}}', '{{rootNamespace}}', '{{namespacedUserModel}}'],
-        ];
-
-        foreach ($searches as $search) {
-            $stub = str_replace(
-                $search,
-                [$this->getNamespace($name), $this->rootNamespace(), $this->userProviderModel()],
-                $stub
-            );
-        }
+            [$this->getNamespace($name), $this->rootNamespace(), $this->userProviderModel()],
+            $stub
+        );
 
         return $this;
     }
@@ -212,7 +204,7 @@ abstract class GeneratorCommand extends Command
     {
         $class = str_replace($this->getNamespace($name).'\\', '', $name);
 
-        return str_replace(['DummyClass', '{{ class }}', '{{class}}'], $class, $stub);
+        return str_replace('DummyClass', $class, $stub);
     }
 
     /**

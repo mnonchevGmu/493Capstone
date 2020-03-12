@@ -19,7 +19,6 @@ namespace Illuminate\Support\Facades;
  * @method static void setEchoFormat(string $format)
  * @method static void withDoubleEncoding()
  * @method static void withoutDoubleEncoding()
- * @method static void withoutComponentTags()
  *
  * @see \Illuminate\View\Compilers\BladeCompiler
  */

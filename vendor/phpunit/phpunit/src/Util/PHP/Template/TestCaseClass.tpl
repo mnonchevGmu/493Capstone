@@ -1,7 +1,5 @@
 <?php
 use SebastianBergmann\CodeCoverage\CodeCoverage;
-use PHPUnit\TextUI\Configuration\Registry;
-use PHPUnit\TextUI\Configuration\PhpHandler;
 
 if (!defined('STDOUT')) {
     // php://stdout does not obey output buffering. Any output would break
@@ -84,10 +82,8 @@ function __phpunit_run_isolated_test()
 $configurationFilePath = '{configurationFilePath}';
 
 if ('' !== $configurationFilePath) {
-    $configuration = Registry::getInstance()->get($configurationFilePath);
-
-    (new PhpHandler)->handle($configuration->php());
-
+    $configuration = PHPUnit\Util\Configuration::getInstance($configurationFilePath);
+    $configuration->handlePHPConfiguration();
     unset($configuration);
 }
 

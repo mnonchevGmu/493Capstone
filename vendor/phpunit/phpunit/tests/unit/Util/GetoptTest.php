@@ -14,14 +14,9 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @small
- * @covers \PHPUnit\Util\Getopt
  */
 final class GetoptTest extends TestCase
 {
-    /**
-     * @covers \PHPUnit\Util\Getopt::getopt
-     * @covers \PHPUnit\Util\Getopt::parseLongOption
-     */
     public function testItIncludeTheLongOptionsAfterTheArgument(): void
     {
         $args = [
@@ -46,10 +41,6 @@ final class GetoptTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    /**
-     * @covers \PHPUnit\Util\Getopt::getopt
-     * @covers \PHPUnit\Util\Getopt::parseShortOption
-     */
     public function testItIncludeTheShortOptionsAfterTheArgument(): void
     {
         $args = [
@@ -74,9 +65,6 @@ final class GetoptTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    /**
-     * @covers \PHPUnit\Util\Getopt::getopt
-     */
     public function testShortOptionUnrecognizedException(): void
     {
         $args = [
@@ -91,10 +79,6 @@ final class GetoptTest extends TestCase
         Getopt::getopt($args, '');
     }
 
-    /**
-     * @covers \PHPUnit\Util\Getopt::getopt
-     * @covers \PHPUnit\Util\Getopt::parseShortOption
-     */
     public function testShortOptionRequiresAnArgumentException(): void
     {
         $args = [
@@ -109,10 +93,6 @@ final class GetoptTest extends TestCase
         Getopt::getopt($args, 'f:');
     }
 
-    /**
-     * @covers \PHPUnit\Util\Getopt::getopt
-     * @covers \PHPUnit\Util\Getopt::parseShortOption
-     */
     public function testShortOptionHandleAnOptionalValue(): void
     {
         $args = [
@@ -135,10 +115,6 @@ final class GetoptTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    /**
-     * @covers \PHPUnit\Util\Getopt::getopt
-     * @covers \PHPUnit\Util\Getopt::parseLongOption
-     */
     public function testLongOptionIsAmbiguousException(): void
     {
         $args = [
@@ -152,10 +128,6 @@ final class GetoptTest extends TestCase
         Getopt::getopt($args, '', ['columns', 'colors']);
     }
 
-    /**
-     * @covers \PHPUnit\Util\Getopt::getopt
-     * @covers \PHPUnit\Util\Getopt::parseLongOption
-     */
     public function testLongOptionUnrecognizedException(): void
     {
         // the exception 'unrecognized option --option' is not thrown
@@ -171,10 +143,6 @@ final class GetoptTest extends TestCase
         Getopt::getopt($args, '', ['colors']);
     }
 
-    /**
-     * @covers \PHPUnit\Util\Getopt::getopt
-     * @covers \PHPUnit\Util\Getopt::parseLongOption
-     */
     public function testLongOptionRequiresAnArgumentException(): void
     {
         $args = [
@@ -188,10 +156,6 @@ final class GetoptTest extends TestCase
         Getopt::getopt($args, '', ['foo=']);
     }
 
-    /**
-     * @covers \PHPUnit\Util\Getopt::getopt
-     * @covers \PHPUnit\Util\Getopt::parseLongOption
-     */
     public function testLongOptionDoesNotAllowAnArgumentException(): void
     {
         $args = [
@@ -205,10 +169,6 @@ final class GetoptTest extends TestCase
         Getopt::getopt($args, '', ['foo']);
     }
 
-    /**
-     * @covers \PHPUnit\Util\Getopt::getopt
-     * @covers \PHPUnit\Util\Getopt::parseLongOption
-     */
     public function testItHandlesLongParametesWithValues(): void
     {
         $command = 'command parameter-0 --exec parameter-1 --conf config.xml --optn parameter-2 --optn=content-of-o parameter-n';
@@ -232,10 +192,6 @@ final class GetoptTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    /**
-     * @covers \PHPUnit\Util\Getopt::getopt
-     * @covers \PHPUnit\Util\Getopt::parseShortOption
-     */
     public function testItHandlesShortParametesWithValues(): void
     {
         $command = 'command parameter-0 -x parameter-1 -c config.xml -o parameter-2 -ocontent-of-o parameter-n';

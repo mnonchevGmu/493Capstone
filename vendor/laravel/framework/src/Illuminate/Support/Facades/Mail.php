@@ -47,6 +47,6 @@ class Mail extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'mail.manager';
+        return 'mailer';
     }
 }

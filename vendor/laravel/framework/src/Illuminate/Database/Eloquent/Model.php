@@ -183,26 +183,14 @@ abstract class Model implements Arrayable, ArrayAccess, Jsonable, JsonSerializab
 
             $this->fireModelEvent('booting', false);
 
-            static::booting();
             static::boot();
-            static::booted();
 
             $this->fireModelEvent('booted', false);
         }
     }
 
     /**
-     * Perform any actions required before the model boots.
-     *
-     * @return void
-     */
-    protected static function booting()
-    {
-        //
-    }
-
-    /**
-     * Bootstrap the model and its traits.
+     * The "booting" method of the model.
      *
      * @return void
      */
@@ -253,16 +241,6 @@ abstract class Model implements Arrayable, ArrayAccess, Jsonable, JsonSerializab
         foreach (static::$traitInitializers[static::class] as $method) {
             $this->{$method}();
         }
-    }
-
-    /**
-     * Perform any actions required after the model boots.
-     *
-     * @return void
-     */
-    protected static function booted()
-    {
-        //
     }
 
     /**
@@ -420,8 +398,6 @@ abstract class Model implements Arrayable, ArrayAccess, Jsonable, JsonSerializab
         );
 
         $model->setTable($this->getTable());
-
-        $model->mergeCasts($this->casts);
 
         return $model;
     }
@@ -667,8 +643,6 @@ abstract class Model implements Arrayable, ArrayAccess, Jsonable, JsonSerializab
      */
     public function save(array $options = [])
     {
-        $this->mergeAttributesFromClassCasts();
-
         $query = $this->newModelQuery();
 
         // If the "saving" event returns false we'll bail out of the save and return
@@ -909,8 +883,6 @@ abstract class Model implements Arrayable, ArrayAccess, Jsonable, JsonSerializab
      */
     public function delete()
     {
-        $this->mergeAttributesFromClassCasts();
-
         if (is_null($this->getKeyName())) {
             throw new Exception('No primary key defined on model.');
         }
@@ -1202,7 +1174,7 @@ abstract class Model implements Arrayable, ArrayAccess, Jsonable, JsonSerializab
         ];
 
         $attributes = Arr::except(
-            $this->getAttributes(), $except ? array_unique(array_merge($except, $defaults)) : $defaults
+            $this->attributes, $except ? array_unique(array_merge($except, $defaults)) : $defaults
         );
 
         return tap(new static, function ($instance) use ($attributes) {
@@ -1502,25 +1474,11 @@ abstract class Model implements Arrayable, ArrayAccess, Jsonable, JsonSerializab
      * Retrieve the model for a bound value.
      *
      * @param  mixed  $value
-     * @param  string|null  $field
      * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function resolveRouteBinding($value, $field = null)
+    public function resolveRouteBinding($value)
     {
-        return $this->where($field ?? $this->getRouteKeyName(), $value)->first();
-    }
-
-    /**
-     * Retrieve the child model for a bound value.
-     *
-     * @param  string  $childType
-     * @param  mixed  $value
-     * @param  string|null  $field
-     * @return \Illuminate\Database\Eloquent\Model|null
-     */
-    public function resolveChildRouteBinding($childType, $value, $field)
-    {
-        return $this->{Str::plural($childType)}()->where($field, $value)->first();
+        return $this->where($this->getRouteKeyName(), $value)->first();
     }
 
     /**
@@ -1682,20 +1640,6 @@ abstract class Model implements Arrayable, ArrayAccess, Jsonable, JsonSerializab
     public function __toString()
     {
         return $this->toJson();
-    }
-
-    /**
-     * Prepare the object for serialization.
-     *
-     * @return array
-     */
-    public function __sleep()
-    {
-        $this->mergeAttributesFromClassCasts();
-
-        $this->classCastCache = [];
-
-        return array_keys(get_object_vars($this));
     }
 
     /**

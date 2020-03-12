@@ -31,6 +31,22 @@ Route::get'/returning, 'VerificationController@_construct');
 Route::get'/thanks, 'LoginController@_construct');
 Route::get'/thanks, 'RegisterController@_construct');
 Route::get'/testform, 'RegisterController@_construct;
+---------------------------------------------------------------------
+Controllers (Automatically creates the routes)
+---------------------------------------------------------------------
+The difference between these routes and the other is that the 
+'resource' option should automatically create routes with the 
+other links rather than doing it manually like the example above. 
+Please let me know if this works.
+
+Route::resource('users', 'FlyController');
+Route::resource('CUSTOMER_MEDIA', 'FlyController');
+Route::resource('MEDIA_TYPE_LOV', 'FlyController');
+Route::resource('_customers', 'FlyController');
+Route::resource('PHONE_TYPE_LOV', 'FlyController');
+Route::resource('failed_jobs', 'FlyController');
+Route::resource('password_resets', 'FlyController');
+
 */
 
 Route::get('/', function () {

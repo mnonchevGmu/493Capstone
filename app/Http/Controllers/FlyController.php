@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 class FlyController extends Controller
 {
+    
+    public function dopost()
+    {
+        return view('dopost');
+    }
+
+
     /**
      * Display a listing of the resource.
      *

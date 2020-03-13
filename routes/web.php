@@ -64,9 +64,11 @@ Route::get('/thanks', function(){
     return view('thanks');
 });
 
-Route::post('/dopost', function(){
-    return view('dopost');
-});
+Route::post('/dopost', 'FlyController@dopost');
+
+// Route::post('/dopost', function(){
+    // return view('dopost');
+// });
 
 Route::get('/testform', function(){
     return view('testform');

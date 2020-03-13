@@ -13,3 +13,4 @@ yarn-error.log
 .composer
 composer
 *.bak
+*.original

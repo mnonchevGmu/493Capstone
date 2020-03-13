@@ -37,6 +37,7 @@ class CreateCustomerMediaTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('CUSTOMER_MEDIA');
         Schema::dropIfExists('_customer_media');
         Schema::enableForeignKeyConstraints();
     }

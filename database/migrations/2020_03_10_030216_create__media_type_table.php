@@ -29,6 +29,10 @@ class CreateMediaTypeTable extends Migration
      */
     public function down()
     {
+
+
         Schema::dropIfExists('MEDIA_TYPE_LOV');
+        Schema::dropIfExists('_media_type');
+
     }
 }

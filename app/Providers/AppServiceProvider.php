@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,8 +22,12 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    /*
+    This is so that we get no max error length when 
+    String is run
+    */
     public function boot()
     {
-        //
+        Schema::defaultStringLength(191);
     }
 }

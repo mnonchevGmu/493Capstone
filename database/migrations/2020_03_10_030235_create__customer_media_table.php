@@ -24,6 +24,8 @@ class CreateCustomerMediaTable extends Migration
             $table->string('MEDIA_TYPE');
             $table->foreign('CUSTOMER_ID')->references('CUSTOMER_ID')->on('CUSTOMERS');
             $table->foreign('MEDIA_TYPE')->references('MEDIA_TYPE')->on('MEDIA_TYPE_LOV');
+            $table->date('CREATION_DATE');
+            $table->date('LAST_UPDATE_DATE');
             $table->timestamps();
         });
           Schema::enableForeignKeyConstraints();

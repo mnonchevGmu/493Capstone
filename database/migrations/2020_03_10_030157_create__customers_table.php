@@ -14,8 +14,8 @@ class CreateCustomersTable extends Migration
     public function up()
     {
     	Schema::disableForeignKeyConstraints();
-        Schema::create('_customers', function (Blueprint $table) {
-            $table->bigIncrements('Customer_id');
+        Schema::create('CUSTOMERS', function (Blueprint $table) {
+            $table->bigIncrements('CUSTOMER_ID');
             $table->string('FIRST_NAME');
             $table->string('LAST_NAME');
             $table->string('EMAIL_ADDRESS');
@@ -35,6 +35,7 @@ class CreateCustomersTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('CUSTOMERS');
         Schema::dropIfExists('_customers');
         Schema::enableForeignKeyConstraints();
     }

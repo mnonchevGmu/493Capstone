@@ -22,6 +22,8 @@ class CreateCustomersTable extends Migration
             $table->string('PHONE_NUMBER');
             $table->string('PHONE_TYPE');
             $table->foreign('PHONE_TYPE')->references('PHONE_TYPE')->on('PHONE_TYPE_LOV');
+            $table->date('CREATION_DATE');
+            $table->date('LAST_UPDATE_DATE');
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();

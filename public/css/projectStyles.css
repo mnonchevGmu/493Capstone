@@ -338,5 +338,10 @@ input[type = "radio"]{
 	padding: 10px 10px 10px 10px;
 }
 
+td, th{
+  border: 1px solid #999;
+  padding: 0.5rem;
+}
+
 
 

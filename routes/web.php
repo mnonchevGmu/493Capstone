@@ -48,6 +48,12 @@ Route::resource('password_resets', 'FlyController');
 
 */
 
+
+// Resource controller for Customer
+// see 'only' or 'except' syntax to limit the operations in the controller
+Route::resource('Customer', 'CustomerController');
+
+
 Route::get('/', function () {
     return view('welcome');
 });

@@ -15,16 +15,15 @@
 
 
 
-<form action="/queryPOST">
-    <!-- needed for Laravel CSRF framework -->
-    @csrf
+<form action="{{ action('customerQueryController@filter')}} " method="POST">
+
   <div class="form-group">
     <label for="FirstName">First Name</label>
-    <input type="text" class="form-control" id="FirstName"  placeholder="First Name">
+    <input type="text" class="form-control" id="FirstName"  placeholder="First Name" name="FirstName">
    </div>
    <div class="form-group">
     <label for="LastName">Last Name</label>
-    <input type="text" class="form-control" id="LastName"  placeholder="Last Name">
+    <input type="text" class="form-control" id="LastName"  placeholder="Last Name" name="LastName">
    </div>
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="VideoOnly" value="VIDEO">
@@ -39,8 +38,11 @@
   <label class="form-check-label" for="VideoAndPhotos">Video and Photos</label>
 </div>
 <br>
+     @csrf
   <button type="submit" class="btn btn-primary" formmethod="post">Submit</button>
 </form>
+
+
 
 
 </div>

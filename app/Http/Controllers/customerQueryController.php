@@ -17,6 +17,7 @@ class customerQueryController extends Controller
         //dd($request->all());
 
 
+        
         $customer = $customer->newQuery();
         // First Name
 
@@ -31,7 +32,11 @@ class customerQueryController extends Controller
 
         // Get the results and return them.
         //can i just return the view with the data? like ...
-        return view('showCustomerTable', ["customers"=>$customer->get()]);
+
+        $customers = $customer->get();
+        $numCustomers = $customers->count();
+
+        return view('showCustomerTable', ["filteredCustomers"=>$customers, "numCustomers"=>$numCustomers]);
     //return $customer->get();
     }
 }

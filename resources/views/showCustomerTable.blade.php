@@ -14,6 +14,8 @@
 <div class="container border border-dark p-3 bg-mediumgrey border-width-3">
 <p>Customer Table</p>
 <br>
+Num Matching Customers: {{ $numCustomers}}
+<br>
 
 <table class = "table table-striped table-hover">
     <thead>
@@ -27,7 +29,7 @@
         </tr>
     </thead>
     <tbody>
-    @foreach($customers as $customer)
+    @foreach($filteredCustomers as $customer)
         <tr>
             <td>{{ $customer->CUSTOMER_ID }}</td>
             <td>{{ $customer->FIRST_NAME }}</td>

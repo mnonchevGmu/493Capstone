@@ -58,8 +58,15 @@ Route::get('/query',function(){
     return view('customerQueryForm');
 });
 
-//Route for the query POST
-Route::post('/queryPOST', 'customerQueryController@filter');
+//added this code for csrf
+Route::group(array('before' => 'csrf'), function()
+{
+    //Route for the query POST
+    Route::post('/queryPOST', 'customerQueryController@filter');
+
+});
+
+
 
 
 Route::get('/', function () {

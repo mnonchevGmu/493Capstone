@@ -53,6 +53,14 @@ Route::resource('password_resets', 'FlyController');
 // see 'only' or 'except' syntax to limit the operations in the controller
 Route::resource('Customer', 'CustomerController');
 
+//Route for the query form
+Route::get('/query',function(){
+    return view('customerQueryForm');
+});
+
+//Route for the query POST
+Route::post('/queryPOST', 'customerQueryController@filter');
+
 
 Route::get('/', function () {
     return view('welcome');

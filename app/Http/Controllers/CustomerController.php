@@ -16,8 +16,7 @@ class CustomerController extends Controller
     {
         
         $customers = Customer::all();
-        // This just returns the JSON for all the data in the database
-        //return $customers;
+
         return view('showCustomerTable',[ 'customers' => $customers]);
     }
 

@@ -70,7 +70,7 @@
                     <input type="hidden" id="customerPhoneType" name="customerPhoneType" value="CELL">
 
 
-                    
+
                     <fieldset class="email-border border border-dark rounded p-3 mb-4">
                         <legend class="email-border">Skydive and Media Information</legend>
                         <div class="form-row">
@@ -96,16 +96,9 @@
                         <div class="form-group">
                             <label for="customerMediaSelection">Media Selection</label>
                             <select class="form-control" id="customerMediaSelection" name="customerMediaSelection">
-                                <optgroup label="Tandem">
-                                    <option>Tandem Video Only</option>
-                                    <option>Tandem Photos Only</option>
-                                    <option>Tandem Video and Photos</option>
-                                </optgroup>
-                                <optgroup label="AFF">
-                                    <option>AFF Video Only</option>
-                                    <option>AFF Photos Only</option>
-                                    <option>AFF Video and Photos</option>
-                                </optgroup>
+                                    <option>VIDEO</option>
+                                    <option>PHOTOS</option>
+                                    <option>VIDEO+PHOTOS</option>
 
                             </select>
                         </div><br>
@@ -153,7 +146,7 @@
                                                 <div class="row reveal-if-active">
 
                                                     <!--Needs to be dependent on user selecting no to terms-->
-                                                    <input class="form-check-input" type="checkbox" value="usb"
+                                                    <input class="form-check-input" type="checkbox" value="Yes"
                                                         id="usbCheck" name="usbCheck">
                                                     <label class="form-check-label pr-5 pl-3" for="usbCheck">
                                                         I understand that I will need to purchase a USB drive to
@@ -183,9 +176,9 @@
                             <!-- <div class="form-row d-flex justify-content-center">-->
 
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="cloud" id="cloudCheck"
-                                    name="cloudCheck">
-                                <label class="form-check-label pr-5 pl-1" for="cloudCheck">
+                                <input class="form-check-input" type="checkbox" value="yes" id="deliveryTimeAck"
+                                    name="deliveryTimeAck">
+                                <label class="form-check-label pr-5 pl-1" for="deliveryTimeAck">
                                     I understand that my media can take up to 48 hours to be delivered
                                 </label>
 

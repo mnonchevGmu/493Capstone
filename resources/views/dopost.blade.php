@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        <!--TODO need to change this to the layout.partials style of page -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,9 +26,11 @@
     <body>
 
 <h1> Result of Insert Goes Here</h1>
+</br>
 <!--debug request
-    @dd($request->all());
+    //@dd($request->all());
 -->
-    Result of insert: {{$resultMessage}}
+
+    <p>Result of insert: {{$resultMessage}}</p>
 
     </body>

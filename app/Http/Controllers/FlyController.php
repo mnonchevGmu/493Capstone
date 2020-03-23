@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 
 use App\Customer;
+use App\CustomerMedia;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -41,8 +42,45 @@ class FlyController extends Controller
         $customer->created_at=$currenttime;
         
 
+
         //Save to database
         $customer->save();
+
+        
+        //Create a new instance of CustomerMedia model
+        $customerMedia = new CustomerMedia;
+        //TODO need to get the CUSTOMER_ID of the record we just saved..
+        //This -should- work
+        $customerMedia->CUSTOMER_ID=$customer->CUSTOMER_ID;
+        $customerMedia->SKYDIVE_DATE=$request->customerJumpDate;
+        //TODO double check these values/etc. with the check boxes/radio buttons..
+        $deliveryBoolVal=FALSE;
+        if ( ($request->has('deliveryTimeAck')) AND ($request->input('deliveryTimeAck'))== 'Yes'){
+            $deliveryBoolVal=TRUE;
+        }
+        $customerMedia->DELIVERY_TIME_ACK=$deliveryBoolVal;
+        $mediaBoolVal=FALSE;
+        if ( ($request->has('mediaTermsAckRadio1')) AND ($request->input('mediaTermsAckRadio1'))!== null){
+            $mediaBoolVal=TRUE;
+        }
+        $customerMedia->MEDIA_TERMS_ACK=$mediaBoolVal;
+        $usbBoolVal=FALSE;
+        if ( ($request->has('usbCheck')) AND ($request->input('usbCheck'))=='Yes'){
+            $usbBoolVal=TRUE;
+        }     
+        $customerMedia->USB_REQUIRED_ACK=$usbBoolVal;
+        $customerMedia->MEDIA_TYPE=$request->customerMediaSelection;
+      
+
+        $customerMedia->CREATION_DATE=$currenttime;
+        $customerMedia->LAST_UPDATE_DATE=$currenttime;
+        //TODO: figure out what to do with the timestamps fields
+        $customerMedia->updated_at=$currenttime;
+        $customerMedia->created_at=$currenttime;
+
+        //Save to database
+        $customerMedia->save();
+
 
         //need to have error handling here to see if save was successful 
         // or not and pass this result to the dopost view

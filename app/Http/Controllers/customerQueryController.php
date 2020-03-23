@@ -55,8 +55,13 @@ class customerQueryController extends Controller
             $customerQuery->where('MEDIA_TYPE', $request->input('customerMediaSelection'));
         }
 
+        //Jump Date
+        if (($request->has('customerJumpDate')) AND ($request->input('customerJumpDate'))!== null) {
+            $customerQuery->where('SKYDIVE_DATE', $request->input('customerJumpDate'));
+        }
+       
+
         // Get the results and return them.
-        //can i just return the view with the data? like ...
 
         $customers = $customerQuery->get();
         $numCustomers = $customers->count();

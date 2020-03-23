@@ -11,11 +11,9 @@
 
 @include('layout.partials.nav')
 
-<div class="container border border-dark p-3 bg-mediumgrey border-width-3">
-<p>Customer Table</p>
-<br>
-Num Matching Customers: {{ $numCustomers}}
-<br>
+<div class="container-fluid border border-dark p-3 bg-mediumgrey border-width-3">
+<h3>Matching Customers</h3>
+<p>Num Matching Customers: {{ $numCustomers}}</p>
 
 <table class = "table table-striped table-hover">
     <thead>
@@ -27,6 +25,7 @@ Num Matching Customers: {{ $numCustomers}}
             <th>Phone Number </th>
             <th>Phone Type </th>
             <th>Media Type </th>
+            <th>Skydive Date </th>
         </tr>
     </thead>
     <tbody>
@@ -39,6 +38,7 @@ Num Matching Customers: {{ $numCustomers}}
              <td>{{ $customer->PHONE_NUMBER }}</td>
             <td>{{ $customer->PHONE_TYPE }}</td>
             <td>{{ $customer->MEDIA_TYPE }}</td>
+            <td>{{ $customer->SKYDIVE_DATE }}</td>
         </tr>
     @endforeach
     </tbody>

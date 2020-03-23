@@ -43,6 +43,11 @@
     <input type="text" class="form-control" id="customerPhoneType"  placeholder="Customer Phone Number" name="customerPhoneType">
    </div>
 
+   <div class="form-group">
+    <label for="customerJumpDate">Jump Date</label>
+    <input type="text" class="form-control" id="customerJumpDate"  placeholder="YYYY-MM-DD" name="customerJumpDate">
+   </div>
+
 <fieldset class="mediaType-border border border-dark rounded p-2">
     <legend class = "mediaType-border">Media Type</legend>
 
@@ -58,6 +63,7 @@
         <input class="form-check-input m-2" type="radio" name="customerMediaSelection" id="customerMediaSelection" value="VIDEO+PHOTOS" >
         <label class="form-check-label m-2" for="VideoAndPhotos">Video and Photos</label>
         </div>
+        <!-- TODO need to make a way to unset the radio buttons-->
 </fieldset>
 
 <br>

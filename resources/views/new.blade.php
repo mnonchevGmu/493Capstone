@@ -2,34 +2,9 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>New Customer</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/x.x.x/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ url('/css/projectStyles.css') }}" />
-
-    <script type="text/javascript" src='scripts.js'>
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
-        integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous">
-    </script>
-
-    <!--
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
--->
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js">
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-methods.js">
-    </script>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"
-        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+<!-- INCLUDE COMMON HEAD -->
+@include('layout.partials.head')
 
 
 </head>
@@ -85,11 +60,17 @@
                             placeholder="email@domain.com">
                         <small id="email2Tip" class="form-text text-muted ml-3">Both email addresses must
                             match</small>
-                        <label for="customerphoneNum">Phone Number</label>
+                        <label for="customerPhoneNum">Phone Number</label>
                         <input type="customerPhoneNum" class="form-control mb-3" id="customerPhoneNum"
                             name="customerPhoneNum" required placeholder="###-###-####">
                     </fieldset>
+                    <!-- TODO add a field for phone type and pull the data from the LOV for dropdown
+                        and remove this hardcoding hidden field
+                    -->
+                    <input type="hidden" id="customerPhoneType" name="customerPhoneType" value="CELL">
 
+
+                    
                     <fieldset class="email-border border border-dark rounded p-3 mb-4">
                         <legend class="email-border">Skydive and Media Information</legend>
                         <div class="form-row">
@@ -109,7 +90,8 @@
                 -->
                         <!--Get customer to select which media they wanted-->
 
-                        <!--Change from select class to selectmenu with jquery UI-->
+                        <!--Change from select class to selectmenu with jquery UI
+                    TODO Change this to pull from Database LOV table-->
 
                         <div class="form-group">
                             <label for="customerMediaSelection">Media Selection</label>
@@ -309,13 +291,6 @@
     });
     </script>
 
-    <!--Script files needed for Bootstrap styles-->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
-    </script>
+@include('layout.partials.footer-scripts')
 
 </body>

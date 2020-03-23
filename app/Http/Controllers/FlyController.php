@@ -2,14 +2,55 @@
 
 namespace App\Http\Controllers;
 
+
+//added Carbon for ease of getting/formatting date and time variables
+use Carbon\Carbon;
+
+use App\Customer;
+use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class FlyController extends Controller
 {
     
-    public function dopost()
+    public function dopost(Request $request)
     {
-        return view('dopost');
+        //debug request
+        //dd($request->all());
+
+        //Create a new instance of Customer model
+        $customer = new Customer;
+
+
+        //Validate inputs as needed
+
+        //Populate customer instance with elements of the request
+        // Date and time of creation
+        $currenttime =Carbon::now();
+
+        $customer->FIRST_NAME=$request->customerFirstName;
+        $customer->LAST_NAME=$request->customerLastName;
+        $customer->EMAIL_ADDRESS=$request->customerEmail1;
+        $customer->PHONE_NUMBER=$request->customerPhoneNum;
+        $customer->PHONE_TYPE=$request->customerPhoneType;
+        $customer->CREATION_DATE=$currenttime;
+        $customer->LAST_UPDATE_DATE=$currenttime;
+        //TODO: figure out what to do with the timestamps fields
+        $customer->updated_at=$currenttime;
+        $customer->created_at=$currenttime;
+        
+
+        //Save to database
+        $customer->save();
+
+        //need to have error handling here to see if save was successful 
+        // or not and pass this result to the dopost view
+        $result = "hardcoded success for now";
+
+        // call view
+        return view('dopost', ["request"=> $request,"resultMessage"=> $result]);
+
     }
 
 

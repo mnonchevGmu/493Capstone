@@ -18,11 +18,11 @@ class customerQueryController extends Controller
 
 
         
-        $customerQuery = $customer->newQuery();
+        $customer = $customer->newQuery();
         // First Name
 
         if ($request->has('FirstName')) {
-            $customerQuery->where('FIRST_NAME', $request->input('FirstName'));
+            $customer->where('FIRST_NAME', $request->input('FirstName'));
         }
 
         // Last Name
@@ -33,7 +33,7 @@ class customerQueryController extends Controller
         // Get the results and return them.
         //can i just return the view with the data? like ...
 
-        $customers = $customerQuery->get();
+        $customers = $customer->get();
         $numCustomers = $customers->count();
 
         return view('showCustomerTable', ["filteredCustomers"=>$customers, "numCustomers"=>$numCustomers]);

@@ -24,10 +24,8 @@
     </head>
     <body>
 
-<h1> Result of Insert Goes Here</h1>
-<!--debug request
-    @dd($request->all());
--->
-    Result of insert: {{$resultMessage}}
-
+<h1> Post values</h1>
+<?php
+    echo "<pre>"; print_r($_POST) ;  echo "</pre>";
+?>
     </body>

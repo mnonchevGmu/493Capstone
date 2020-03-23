@@ -38,7 +38,7 @@ Num Matching Customers: {{ $numCustomers}}
              <td>{{ $customer->PHONE_NUMBER }}</td>
             <td>{{ $customer->PHONE_TYPE }}</td>
         </tr>
-    @endforeach
+        @endforeach
     </tbody>
 
 </table>

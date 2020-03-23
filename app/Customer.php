@@ -10,10 +10,8 @@ class Customer extends Model
     protected $table = 'CUSTOMERS';
     protected $primaryKey = 'CUSTOMER_ID';
     //TODO: validate date format
-    //U is timestamp (seconds from epoch)
-    //Y-m-d H:i:s is the Carbon format default (?)
-    protected $dateFormat = 'Y-m-d H:i:s';
+    protected $dateFormat = 'U';
 
     //protected $connection = 'mysql';
-
+    
 }

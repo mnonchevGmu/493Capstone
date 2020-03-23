@@ -16,4 +16,13 @@ class CustomerMedia extends Model
 
     //protected $connection = 'mysql';
 
+
+    /**
+     * Get the Customer that purchased the media.
+     */
+    public function customer()
+    {
+        return $this->belongsTo('App\Customer', 'CUSTOMER_ID','CUSTOMER_ID');
+    }
+
 }

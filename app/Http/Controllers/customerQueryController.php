@@ -17,8 +17,11 @@ class customerQueryController extends Controller
         //dd($request->all());
 
 
-        
+        //Create a new query object
         $customerQuery = $customer->newQuery();
+
+        //Join to customer_media
+        $customerQuery->join('CUSTOMER_MEDIA', 'CUSTOMERS.CUSTOMER_ID', '=', 'CUSTOMER_MEDIA.CUSTOMER_ID');
         // First Name
 
         if (($request->has('customerFirstName')) AND ($request->input('customerFirstName'))!== null) {
@@ -44,21 +47,14 @@ class customerQueryController extends Controller
             $customerQuery->where('PHONE_TYPE', $request->input('customerPhoneType'));
         }
         
-        /*start of Monica changes
 
         // Media Type
         //
         
-        if ($request->has('videoOnly')) {
-            $customerQuery->where('VIDEO', $request->input('videoOnly'));
+        if (($request->has('customerMediaSelection')) AND ($request->input('customerMediaSelection'))!== null) {
+            $customerQuery->where('MEDIA_TYPE', $request->input('customerMediaSelection'));
         }
-        else if ($request->has('photoOnly')){
-            $customerQuery->where('PHOTOS', $request->input('photoOnly'));
-        }
-        else ($request->has('VideoAndPhotos')){
-            $customerQuery->where('VIDEO+PHOTOS', $request->input('VideoAndPhotos'));
-        }
-        END*/
+
         // Get the results and return them.
         //can i just return the view with the data? like ...
 

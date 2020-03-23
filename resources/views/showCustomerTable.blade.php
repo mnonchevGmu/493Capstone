@@ -20,12 +20,13 @@ Num Matching Customers: {{ $numCustomers}}
 <table class = "table table-striped table-hover">
     <thead>
         <tr>
-            <th>Customer ID: </th>
-            <th>First Name: </th>
-            <th>Last Name: </th>
-            <th>Email Address: </th>
-            <th>Phone Number: </th>
-            <th>Phone Type: </th>
+            <th>Customer ID </th>
+            <th>First Name </th>
+            <th>Last Name </th>
+            <th>Email Address </th>
+            <th>Phone Number </th>
+            <th>Phone Type </th>
+            <th>Media Type </th>
         </tr>
     </thead>
     <tbody>
@@ -37,6 +38,7 @@ Num Matching Customers: {{ $numCustomers}}
              <td>{{ $customer->EMAIL_ADDRESS }}</td>
              <td>{{ $customer->PHONE_NUMBER }}</td>
             <td>{{ $customer->PHONE_TYPE }}</td>
+            <td>{{ $customer->MEDIA_TYPE }}</td>
         </tr>
     @endforeach
     </tbody>

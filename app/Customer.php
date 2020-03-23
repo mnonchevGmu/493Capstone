@@ -16,4 +16,11 @@ class Customer extends Model
 
     //protected $connection = 'mysql';
 
+    /**
+     * Get the media records associated with the customer.
+     */
+    public function customerMedia()
+    {
+        return $this->hasMany('App\Phone','CUSTOMER_ID','CUSTOMER_ID');
+    }
 }

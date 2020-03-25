@@ -5,6 +5,7 @@
 
     <!-- INCLUDE COMMON HEAD -->
     @include('layout.partials.head')
+    <title>New Customer</title>
 
 
 </head>
@@ -19,6 +20,17 @@
     </a>
 </div>
 -->
+<!--This is where any validation errors will go-->
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <!--Beginning of the main content where the user is asked to enter info on a form-->
     <div class="row">
         <div class="col-md-12 col1color">
@@ -30,7 +42,7 @@
             </div>
 
             <div class="container border border-dark p-3 bg-mediumgrey border-width-3">
-                <form id="customerInfo" action="/dopost" method="POST" target="_self">
+                <form id="customerInfo" action="/validatePost" method="POST" target="_self">
                     <!-- laravel function to prevent cross-site request forgery attacks -->
                     @csrf
                     <!--Get the customer's first name-->
@@ -84,7 +96,6 @@
                                         value="WORK">
                                     <label class="form-check-label m-2" for="workPhoneType">Work</label>
                                 </div>
-
                             </div>
                         </div>
 
@@ -104,10 +115,7 @@
 
                         </div>
 
-                        <!--Taken out
-                <p>Please select the media that you would like to purchase today.
-                </p>
-                -->
+
                         <!--Get customer to select which media they wanted-->
 
                         <!--Change from select class to selectmenu with jquery UI
@@ -123,12 +131,7 @@
                             </select>
                         </div><br>
                     </fieldset>
-                    <!--Taken out
-                <div class = "form-group ui-widget">
-                    <label for="customerMediaSelection">Media Selection (start with AFF or Tandem)</label>
-                    <input id = "customerMediaSelection" class = "form-control">
-                </div>
-            -->
+
 
                     <!--Get customer to select if they wanted to upgrade or not-->
                     <div class="form-row">
@@ -145,7 +148,7 @@
                                         <div class="row p-2">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="mediaTermsAckRadio"
-                                                    id="mediaTermsAckRadio1" value="yes" checked>
+                                                    id="mediaTermsAckRadio1" value="Yes" checked>
                                                 <label class="form-check-label" for="mediaTypeRadio1">
                                                     I acknowledge
                                                 </label>
@@ -157,7 +160,7 @@
                                             <div class="form-check">
 
                                                 <input class="form-check-input" type="radio" name="mediaTermsAckRadio"
-                                                    id="mediaTermsAckRadio2" value="no">
+                                                    id="mediaTermsAckRadio2" value="No">
                                                 <label class="form-check-label" for="mediaTypeRadio2">
                                                     I <u>do not</u> acknowledge
                                                 </label>
@@ -198,7 +201,7 @@
                             <!-- <div class="form-row d-flex justify-content-center">-->
 
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="yes" id="deliveryTimeAck"
+                                <input class="form-check-input" type="checkbox" value="Yes" id="deliveryTimeAck"
                                     name="deliveryTimeAck">
                                 <label class="form-check-label pr-5 pl-1" for="deliveryTimeAck">
                                     I understand that my media can take up to 48 hours to be delivered

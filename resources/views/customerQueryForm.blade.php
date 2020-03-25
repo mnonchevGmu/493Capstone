@@ -3,8 +3,7 @@
 
 <head>
     @include('layout.partials.head')
-    <link rel="stylesheet" type="text/css" href="{{ url('/css/projectStyles.css') }}" />
-
+    <title>Search for Customer</title>
 </head>
 
 <body>
@@ -61,6 +60,10 @@
                                 value="WORK">
                             <label class="form-check-label m-2" for="workPhoneType">Work</label>
                         </div>
+                        <div class="form-check form-check-inline">
+                                <input type="button" value="Clear Selection" id="ClearPhoneType">
+                                
+                            </div>
 
                     </div>
                 </div>
@@ -93,7 +96,10 @@
                         value="VIDEO+PHOTOS">
                     <label class="form-check-label m-2" for="VideoAndPhotos">Video and Photos</label>
                 </div>
-                <!-- TODO need to make a way to unset the radio buttons-->
+                <div class="form-check form-check-inline">
+                                <input type="button" value="Clear Selection" id="ClearMediaType">
+                                
+                </div>
             </fieldset>
 
             <br>
@@ -105,7 +111,7 @@
 
 
     </div>
-
+    @include('layout.partials.clear-scripts')
     @include('layout.partials.footer-scripts')
 
 </body>

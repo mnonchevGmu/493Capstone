@@ -14,9 +14,24 @@ use App\Http\Controllers\Controller;
 
 class FlyController extends Controller
 {
-    
-    public function dopost(Request $request)
-    {
+    public function newCustomerValidate(Request $request)
+    {//TODO: add custom messages
+        $validatedData = $request->validate([
+            'customerFirstName' => 'required|max:255',
+            'customerLastName' => 'required|max:255',
+            'customerEmail1' => 'required|max:255|email:rfc,dns',
+            'customerEmail2' => 'required|max:255|email:rfc,dns|same:customerEmail1',
+            'customerPhoneNum' => 'required|max:20|regex:/^[2-9]\d{2}-\d{3}-\d{4}$/',
+            'customerPhoneType' => 'required|exists:PHONE_TYPE_LOV,PHONE_TYPE',
+            'customerJumpDate' => 'required|date',
+            'customerMediaSelection' => 'required|exists:MEDIA_TYPE_LOV,MEDIA_TYPE',
+            'mediaTermsAckRadio' => 'required',
+            'usbCheck' => 'nullable|required_if:mediaTermsAckRadio, "No"',
+            'deliveryTimeAck' => 'required'
+
+        ]);
+
+ 
         //debug request
         //dd($request->all());
 
@@ -87,7 +102,7 @@ class FlyController extends Controller
         $result = "hardcoded success for now";
 
         // call view
-        return view('dopost', ["request"=> $request,"resultMessage"=> $result]);
+        return view('thanks', ["request"=> $request,"resultMessage"=> $result]);
 
     }
 

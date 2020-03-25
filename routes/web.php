@@ -66,6 +66,12 @@ Route::group(array('before' => 'csrf'), function()
 
 });
 
+Route::group(array('before' => 'csrf'), function()
+{
+    //Route for the validation POST
+    Route::post('/validatePost', 'FlyController@newCustomerValidate');
+
+});
 
 
 
@@ -76,6 +82,11 @@ Route::get('/', function () {
 Route::get('/new', function(){
     return view('new');
 });
+
+//TODO: remove this when done testing
+// Route::get('/testNew', function(){
+//     return view('testNew');
+// });
 
 Route::get('/returning', function(){
     return view('returning');

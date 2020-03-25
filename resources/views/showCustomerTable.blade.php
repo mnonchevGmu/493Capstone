@@ -3,7 +3,8 @@
 
 <head>
 @include('layout.partials.head')
-<link rel="stylesheet" type="text/css" href="{{ url('/css/projectStyles.css') }}" />
+
+<title>{{ $numCustomers}} Matching Customers</title>
 
 </head>
 
@@ -26,6 +27,7 @@
             <th>Phone Type </th>
             <th>Media Type </th>
             <th>Skydive Date </th>
+            <th>USB?</th>
         </tr>
     </thead>
     <tbody>
@@ -39,6 +41,7 @@
             <td>{{ $customer->PHONE_TYPE }}</td>
             <td>{{ $customer->MEDIA_TYPE }}</td>
             <td>{{ $customer->SKYDIVE_DATE }}</td>
+            <td>{{ ($customer->USB_REQUIRED_ACK == 1) ? 'Yes' : 'No' }}</td>
         </tr>
     @endforeach
     </tbody>

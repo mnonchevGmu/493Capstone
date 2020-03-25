@@ -2,7 +2,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="Application built for Skydive Orange Customer Media registration">
 <meta name="author" content="FlyHigh">
-<title>Fly High</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/x.x.x/css/bootstrap.min.css">
 
@@ -29,6 +28,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"
         integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="{{ url('/css/projectStyles.css') }}" />
+ 
+        <!-- TODO: point to the bootstrap local vs this CDN link-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
 
         <!-- Project specific style sheet -->
         <link rel="stylesheet" type="text/css" href="{{ url('/css/projectStyles.css') }}" />

@@ -3,8 +3,8 @@
 
 <head>
 
-<!-- INCLUDE COMMON HEAD -->
-@include('layout.partials.head')
+    <!-- INCLUDE COMMON HEAD -->
+    @include('layout.partials.head')
 
 
 </head>
@@ -23,8 +23,8 @@
     <div class="row">
         <div class="col-md-12 col1color">
             <div class="container mt-4">
-               
-                <p id="top" class = "col-md-12 col1color">Please fill out the form below and read the Terms and Conditions
+
+                <p id="top" class="col-md-12 col1color">Please fill out the form below and read the Terms and Conditions
                     of your media purchase.<br>
                 </p>
             </div>
@@ -60,15 +60,35 @@
                             placeholder="email@domain.com">
                         <small id="email2Tip" class="form-text text-muted ml-3">Both email addresses must
                             match</small>
-                        <label for="customerPhoneNum">Phone Number</label>
-                        <input type="customerPhoneNum" class="form-control mb-3" id="customerPhoneNum"
-                            name="customerPhoneNum" required placeholder="###-###-####">
-                    </fieldset>
-                    <!-- TODO add a field for phone type and pull the data from the LOV for dropdown
-                        and remove this hardcoding hidden field
-                    -->
-                    <input type="hidden" id="customerPhoneType" name="customerPhoneType" value="CELL">
+                        <div class="row">
+                            <div class="col-md-6">
 
+                                <label for="customerPhoneNum">Phone Number</label>
+                                <input type="customerPhoneNum" class="form-control mb-3" id="customerPhoneNum"
+                                    name="customerPhoneNum" required placeholder="###-###-####">
+                            </div>
+                            <div class="col-md-6 mt-4">
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input m-2" type="radio" name="customerPhoneType" id="cellPhoneType"
+                                        value="CELL">
+                                    <label class="form-check-label m-2" for="cellPhoneType">Cell</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input m-2" type="radio" name="customerPhoneType" id="homePhoneType"
+                                        value="HOME">
+                                    <label class="form-check-label m-2" for="homePhoneType">Home</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input m-2" type="radio" name="customerPhoneType" id="workPhoneType"
+                                        value="WORK">
+                                    <label class="form-check-label m-2" for="workPhoneType">Work</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </fieldset>
 
 
                     <fieldset class="email-border border border-dark rounded p-3 mb-4">
@@ -96,9 +116,9 @@
                         <div class="form-group">
                             <label for="customerMediaSelection">Media Selection</label>
                             <select class="form-control" id="customerMediaSelection" name="customerMediaSelection">
-                                    <option>VIDEO</option>
-                                    <option>PHOTOS</option>
-                                    <option>VIDEO+PHOTOS</option>
+                                <option>VIDEO</option>
+                                <option>PHOTOS</option>
+                                <option>VIDEO+PHOTOS</option>
 
                             </select>
                         </div><br>
@@ -136,12 +156,11 @@
                                         <div class="row p-2 ">
                                             <div class="form-check">
 
-                                                    <input class="form-check-input" type="radio"
-                                                        name="mediaTermsAckRadio" id="mediaTermsAckRadio2" value="no"
-                                                        >
-                                                    <label class="form-check-label" for="mediaTypeRadio2">
-                                                        I <u>do not</u> acknowledge
-                                                    </label>
+                                                <input class="form-check-input" type="radio" name="mediaTermsAckRadio"
+                                                    id="mediaTermsAckRadio2" value="no">
+                                                <label class="form-check-label" for="mediaTypeRadio2">
+                                                    I <u>do not</u> acknowledge
+                                                </label>
 
                                                 <div class="row reveal-if-active">
 
@@ -159,7 +178,7 @@
                                         </div>
                                     </div>
 
-                                   
+
                                     <div class="col">
                                         <p>that my media will be uploaded to public media services such as Youtube and
                                             Dropbox
@@ -168,9 +187,12 @@
                                     </div>
                                 </div>
                             </div>
-                             <p>Our goal is to get your skydive media to you as quick as reasonably possible.  There are several factors
-                             which may delay delivery of your media including: internet speeds, YouTube and Dropbox availability, and 
-                             the volume of customers.  You should expect to receive your media within 48 hours, if not sooner.
+                            <p>Our goal is to get your skydive media to you as quick as reasonably possible. There are
+                                several factors
+                                which may delay delivery of your media including: internet speeds, YouTube and Dropbox
+                                availability, and
+                                the volume of customers. You should expect to receive your media within 48 hours, if not
+                                sooner.
                             </p>
 
                             <!-- <div class="form-row d-flex justify-content-center">-->
@@ -220,7 +242,7 @@
                 </form>
             </div>
 
-  
+
         </div>
 
 
@@ -284,6 +306,6 @@
     });
     </script>
 
-@include('layout.partials.footer-scripts')
+    @include('layout.partials.footer-scripts')
 
 </body>

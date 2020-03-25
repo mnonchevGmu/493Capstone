@@ -41,12 +41,12 @@ class customerQueryController extends Controller
         if (($request->has('customerPhoneNum')) AND ($request->input('customerPhoneNum'))!== null )  {
             $customerQuery->where('PHONE_NUMBER', $request->input('customerPhoneNum'));
         }
-        
-        // Phone Type
+
+        // Phone type
         if (($request->has('customerPhoneType')) AND ($request->input('customerPhoneType'))!== null )  {
             $customerQuery->where('PHONE_TYPE', $request->input('customerPhoneType'));
         }
-        
+                
 
         // Media Type
         //

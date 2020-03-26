@@ -88,6 +88,7 @@ Route::get('/new', function(){
 //     return view('testNew');
 // });
 
+//TODO: remove
 Route::get('/returning', function(){
     return view('returning');
 });

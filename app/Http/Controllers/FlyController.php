@@ -16,20 +16,52 @@ class FlyController extends Controller
 {
     public function newCustomerValidate(Request $request)
     {//TODO: add custom messages
-        $validatedData = $request->validate([
-            'customerFirstName' => 'required|max:255',
-            'customerLastName' => 'required|max:255',
-            'customerEmail1' => 'required|max:255|email:rfc,dns',
-            'customerEmail2' => 'required|max:255|email:rfc,dns|same:customerEmail1',
-            'customerPhoneNum' => 'required|max:20|regex:/^[2-9]\d{2}-\d{3}-\d{4}$/',
-            'customerPhoneType' => 'required|exists:PHONE_TYPE_LOV,PHONE_TYPE',
-            'customerJumpDate' => 'required|date',
-            'customerMediaSelection' => 'required|exists:MEDIA_TYPE_LOV,MEDIA_TYPE',
-            'mediaTermsAckRadio' => 'required',
-            'usbCheck' => 'nullable|required_if:mediaTermsAckRadio, "No"',
-            'deliveryTimeAck' => 'required'
 
-        ]);
+        $rules = [
+                'customerFirstName' => 'required|max:255',
+                'customerLastName' => 'required|max:255',
+                'customerEmail1' => 'required|max:255|email:rfc,dns|regex:/.+(?<!edu)$/',
+                'customerEmail2' => 'required|max:255|email:rfc,dns|same:customerEmail1',
+                'customerPhoneNum' => 'required|max:20|regex:/^[2-9]\d{2}-\d{3}-\d{4}$/',
+                'customerPhoneType' => 'required|exists:PHONE_TYPE_LOV,PHONE_TYPE',
+                'customerJumpDate' => 'required|date',
+                'customerMediaSelection' => 'required|exists:MEDIA_TYPE_LOV,MEDIA_TYPE',
+                'mediaTermsAckRadio' => 'required',
+                'usbCheck' => 'nullable|required_if:mediaTermsAckRadio, "No"',
+                'deliveryTimeAck' => 'required'
+            ];
+    
+        $customMessages = [
+            'customerEmail1.required'=> 'You must provide an email address',
+            'customerEmail1.email'=> 'You must provide a valid email address',
+            'customerEmail1.regex' => 'Email cannot be a school (.edu) email',
+            'customerEmail2.required'=> 'You must provide an email address and both must match',
+            'customerEmail2.email'=> 'You must provide a valid email address and both must match',
+            'customerEmail2.same'=> 'Both emails must match',
+            'usbCheck.required_if' => 'You must acknowledge that you will need to purchase a USB if you do not want your media posted',
+            'customerPhoneType.exists' => 'You must provide a valid phone type',
+            'customerMediaSelection' => 'You must provide a valid media type',
+            'required' => 'The :attribute field can not be blank.'
+        ];
+    
+        $this->validate($request, $rules, $customMessages);
+
+        
+        // $validatedData = $request->validate([
+        //     'customerFirstName' => 'required|max:255',
+        //     'customerLastName' => 'required|max:255',
+        //     'customerEmail1' => 'required|max:255|email:rfc,dns',
+        //     'customerEmail2' => 'required|max:255|email:rfc,dns|same:customerEmail1',
+        //     'customerPhoneNum' => 'required|max:20|regex:/^[2-9]\d{2}-\d{3}-\d{4}$/',
+        //     'customerPhoneType' => 'required|exists:PHONE_TYPE_LOV,PHONE_TYPE',
+        //     'customerJumpDate' => 'required|date',
+        //     'customerMediaSelection' => 'required|exists:MEDIA_TYPE_LOV,MEDIA_TYPE',
+        //     'mediaTermsAckRadio' => 'required',
+        //     'usbCheck' => 'nullable|required_if:mediaTermsAckRadio, "No"',
+        //     'deliveryTimeAck' => 'required'
+
+        // ]);
+
 
  
         //debug request

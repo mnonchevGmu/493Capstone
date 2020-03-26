@@ -14,3 +14,4 @@ yarn-error.log
 composer
 *.bak
 *.original
+tests/Selenium/*.log

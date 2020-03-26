@@ -8,7 +8,7 @@ class ThanksTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.driver = webdriver.Chrome(executable_path="..\drivers\chromedriver.exe")
+        cls.driver = webdriver.Chrome(executable_path=r"C:\Users\J\PycharmProjects\FirstSeleniumProject\drivers\chromedriver.exe")
         cls.driver.implicitly_wait(10)
         cls.driver.maximize_window()
 

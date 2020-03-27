@@ -26,7 +26,10 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
+    //TODO maybe make a better landing page after authenticating, but
+    //for not, direct to query form
+    protected $redirectTo = "/query";
 
     /**
      * Create a new controller instance.

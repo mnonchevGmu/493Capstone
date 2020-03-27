@@ -1,14 +1,9 @@
-<!doctype html>
-<html>
 
-<head>
-    @include('layout.partials.head')
-    <title>Search for Customer</title>
-</head>
+@extends('layouts.app')
 
-<body>
-
-    @include('layout.partials.nav')
+@section('content')
+    <!-- INCLUDE project css -->
+    @include('layout.partials.project')
 
     <div class="container border border-dark p-3 bg-mediumgrey border-width-3">
 
@@ -107,13 +102,14 @@
             <button type="submit" class="btn btn-primary" formmethod="post">Submit</button>
         </form>
 
-
-
+        <div class="authUserDisplay mt-4">
+         Authenticated as {{ Auth::user()->name }} 
+        </div>
 
     </div>
+
+
     @include('layout.partials.clear-scripts')
     @include('layout.partials.footer-scripts')
 
-</body>
-
-</html>
+@endsection

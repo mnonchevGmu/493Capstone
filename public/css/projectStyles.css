@@ -349,3 +349,8 @@ medialTypeLabel {
 	border-bottom:none;
 }
 
+
+authUserDisplay {
+  padding: 0.5rem;
+  color: rgba(116, 3, 3, 0.4);
+}

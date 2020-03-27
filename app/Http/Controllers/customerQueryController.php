@@ -69,4 +69,10 @@ class customerQueryController extends Controller
         return view('showCustomerTable', ["filteredCustomers"=>$customers, "numCustomers"=>$numCustomers]);
     //return $customer->get();
     }
+
+    //Constructor to enable authentication requirement for this page
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 }

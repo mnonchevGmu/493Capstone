@@ -51,12 +51,9 @@ Route::resource('password_resets', 'FlyController');
 
 // Resource controller for Customer
 // see 'only' or 'except' syntax to limit the operations in the controller
+//may end up not needing this?
 Route::resource('Customer', 'CustomerController');
 
-//Route for the query form
-Route::get('/query',function(){
-    return view('customerQueryForm');
-});
 
 //added this code for csrf
 Route::group(array('before' => 'csrf'), function()
@@ -75,10 +72,12 @@ Route::group(array('before' => 'csrf'), function()
 
 
 
+// Welcome page
 Route::get('/', function () {
     return view('welcome');
 });
 
+// New Customer Form
 Route::get('/new', function(){
     return view('new');
 });
@@ -99,10 +98,23 @@ Route::get('/thanks', function(){
 
 Route::post('/dopost', 'FlyController@dopost');
 
-// Route::post('/dopost', function(){
-    // return view('dopost');
-// });
 
+//TODO remove this... used for testing the validation on the new customer form
 Route::get('/testform', function(){
     return view('testform');
 });
+
+//if we need to turn off the ability to register
+//TODO switch to this
+//Auth::routes(['register' => false]);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+//Route for the Videographers customer query form
+//added the middleware auth to ensure the user is authenticated
+Route::get('/query',function(){
+    return view('customerQueryForm');
+})->middleware('auth');

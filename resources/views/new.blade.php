@@ -12,14 +12,6 @@
 
 <body>
 
-    <!--Placement of logo
-<div class="topleft">
-    <a href = '/welcome'>
-        <img src = "/images/SOI Logo100x100.png" alt = "Skydive Orange Logo"
-            style="margin: 15px 15px 15px 15px">
-    </a>
-</div>
--->
 <!--This is where any validation errors will go-->
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -81,21 +73,7 @@
                             </div>
                             <div class="col-md-6 mt-4">
 
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input m-2" type="radio" name="customerPhoneType" id="cellPhoneType"
-                                        value="CELL">
-                                    <label class="form-check-label m-2" for="cellPhoneType">Cell</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input m-2" type="radio" name="customerPhoneType" id="homePhoneType"
-                                        value="HOME">
-                                    <label class="form-check-label m-2" for="homePhoneType">Home</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input m-2" type="radio" name="customerPhoneType" id="workPhoneType"
-                                        value="WORK">
-                                    <label class="form-check-label m-2" for="workPhoneType">Work</label>
-                                </div>
+                            @include('layout.partials.phonetype-formfield')
                             </div>
                         </div>
 
@@ -118,18 +96,8 @@
 
                         <!--Get customer to select which media they wanted-->
 
-                        <!--Change from select class to selectmenu with jquery UI
-                    TODO Change this to pull from Database LOV table-->
+@include('layout.partials.mediatype-formfield')
 
-                        <div class="form-group">
-                            <label for="customerMediaSelection">Media Selection</label>
-                            <select class="form-control" id="customerMediaSelection" name="customerMediaSelection">
-                                <option>VIDEO</option>
-                                <option>PHOTOS</option>
-                                <option>VIDEO+PHOTOS</option>
-
-                            </select>
-                        </div><br>
                     </fieldset>
 
 
@@ -264,50 +232,7 @@
     </div>
     </div>
 
-    <!--Jquery validate plugin-->
-    <script>
-    //old validator.
-    $("#customerInfo").validate();
-
-    /*
-    var $form = $("customerInfo"),
-    $successMsg = $(".alert");
-    $.validate({
-    errorMessageClass: "error",
-    onSuccess: function(){
-        $successMsg.show();
-        return false; // stops submitting
-    }
-    });
-    */
-
-    /*
-    $( function() {
-        $("#customerMediaSelection").selectmenu();
-        console.log("done");
-      } );
-    */
-
-
-
-
-    $(function() {
-        var availableMedia = [
-            "Tandem Photos Only",
-            "Tandem Video and Photos",
-            "Tandem Video Only",
-            "AFF Photos Only",
-            "AFF Video and Photos",
-            "AFF Video Only"
-        ];
-
-        $("#customerMediaSelection").autocomplete({
-            source: availableMedia
-        });
-
-
-    });
-    </script>
+    <script src="{{ asset('js/clear-radios.js') }}" defer ></script>
 
     @include('layout.partials.footer-scripts')
 

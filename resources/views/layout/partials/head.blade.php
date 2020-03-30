@@ -5,7 +5,6 @@
 
 <!-- TODO remove these if the laravel/ui bootstrap automatically adds them
 --> 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/x.x.x/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -22,8 +21,6 @@
         integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
  
 
-    <script type="text/javascript" src='scripts.js'>
-    </script>
 
  
 
@@ -36,8 +33,6 @@
  
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <link rel="stylesheet" type="text/css" href="{{ url('/css/projectStyles.css') }}" />
  
         <!-- TODO: point to the bootstrap local vs this CDN link-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">

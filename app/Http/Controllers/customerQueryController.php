@@ -13,6 +13,8 @@ class customerQueryController extends Controller
     //
     public function filter(Request $request, Customer $customer)
     {
+        //TODO: figure out how to make this a constant
+        $wildcard = "%";
         //debug request
         //dd($request->all());
 
@@ -25,21 +27,48 @@ class customerQueryController extends Controller
         // First Name
 
         if (($request->has('customerFirstName')) AND ($request->input('customerFirstName'))!== null) {
-            $customerQuery->where('FIRST_NAME', $request->input('customerFirstName'));
+            if( (strpos(($request->input('customerFirstName')), $wildcard) ) === false) {
+                $queryOperator = '=';
+            }
+            else{
+                $queryOperator = 'like';
+            }
+            $customerQuery->where('FIRST_NAME', $queryOperator, $request->input('customerFirstName'));
         }
 
         // Last Name
         if (($request->has('customerLastName')) AND ($request->input('customerLastName'))!== null ) {
-            $customerQuery->where('LAST_NAME', $request->input('customerLastName'));
+            if( (strpos(($request->input('customerLastName')), $wildcard) ) === false) {
+                $queryOperator = '=';
+            }
+            else{
+                $queryOperator = 'like';
+            }
+ 
+            $customerQuery->where('LAST_NAME', $queryOperator,$request->input('customerLastName'));
         }
         // Email
         if (($request->has('customerEmail1')) AND ($request->input('customerEmail1'))!== null ) {
-            $customerQuery->where('EMAIL_ADDRESS', $request->input('customerEmail1'));
+            if( (strpos(($request->input('customerEmail1')), $wildcard) ) === false) {
+                $queryOperator = '=';
+            }
+            else{
+                $queryOperator = 'like';
+            }
+
+            $customerQuery->where('EMAIL_ADDRESS', $queryOperator, $request->input('customerEmail1'));
         }
         
         // Phone Number
         if (($request->has('customerPhoneNum')) AND ($request->input('customerPhoneNum'))!== null )  {
-            $customerQuery->where('PHONE_NUMBER', $request->input('customerPhoneNum'));
+            if( (strpos(($request->input('customerPhoneNum')), $wildcard) ) === false) {
+                $queryOperator = '=';
+            }
+            else{
+                $queryOperator = 'like';
+            }
+
+            $customerQuery->where('PHONE_NUMBER', $queryOperator, $request->input('customerPhoneNum'));
         }
 
         // Phone type
@@ -57,7 +86,14 @@ class customerQueryController extends Controller
 
         //Jump Date
         if (($request->has('customerJumpDate')) AND ($request->input('customerJumpDate'))!== null) {
-            $customerQuery->where('SKYDIVE_DATE', $request->input('customerJumpDate'));
+            if( (strpos(($request->input('customerJumpDate')), $wildcard) ) === false) {
+                $queryOperator = '=';
+            }
+            else{
+                $queryOperator = 'like';
+            }
+  
+            $customerQuery->where('SKYDIVE_DATE', $queryOperator, $request->input('customerJumpDate'));
         }
        
 

@@ -100,9 +100,9 @@ Route::post('/dopost', 'FlyController@dopost');
 
 
 //TODO remove this... used for testing the validation on the new customer form
-Route::get('/testform', function(){
-    return view('testform');
-});
+//Route::get('/testform', function(){
+//    return view('testform');
+//});
 
 //if we need to turn off the ability to register
 //TODO switch to this

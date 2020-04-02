@@ -14,8 +14,8 @@ class ThanksTest(unittest.TestCase):
 
     def test_login_valid(self):
         self.driver.get("http://ec2-54-172-128-139.compute-1.amazonaws.com/thanks")
-        self.driver.find_element_by_link_text("RETURNING CUSTOMER").click()
-        time.sleep(10)
+        self.driver.find_element_by_link_text("CHECK IN HERE").click()
+        time.sleep(8)
 
     @classmethod
     def tearDownClass(cls):

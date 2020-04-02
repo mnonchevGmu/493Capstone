@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.support.select import Select
 
 
-class WelcomeTest(unittest.TestCase):
+class TestLoginPage(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -13,9 +13,11 @@ class WelcomeTest(unittest.TestCase):
         cls.driver.maximize_window()
 
     def test_login_valid(self):
-        self.driver.get("http://ec2-54-172-128-139.compute-1.amazonaws.com")
-        self.driver.find_element_by_link_text("CHECK IN HERE").click()
+        self.driver.get("http://ec2-54-172-128-139.compute-1.amazonaws.com/login")
         time.sleep(8)
+
+
+
 
     @classmethod
     def tearDownClass(cls):

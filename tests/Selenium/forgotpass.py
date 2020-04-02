@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.support.select import Select
 
 
-class WelcomeTest(unittest.TestCase):
+class TestForgotPass(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -13,9 +13,15 @@ class WelcomeTest(unittest.TestCase):
         cls.driver.maximize_window()
 
     def test_login_valid(self):
-        self.driver.get("http://ec2-54-172-128-139.compute-1.amazonaws.com")
-        self.driver.find_element_by_link_text("CHECK IN HERE").click()
+        self.driver.get("http://ec2-54-172-128-139.compute-1.amazonaws.com/login")
+        self.driver.find_element_by_link_text("Forgot Your Password?").click()
+        self.driver.find_element_by_name("email").send_keys("eric@gmail.com")
+        time.sleep(6)
+        self.driver.find_element_by_css_selector(".btn-primary").click()
         time.sleep(8)
+
+
+
 
     @classmethod
     def tearDownClass(cls):

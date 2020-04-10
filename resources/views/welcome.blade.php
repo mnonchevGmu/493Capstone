@@ -17,7 +17,7 @@
 
 
         <div class="title bg-black text-center">
-            <p class="welcomeTitle">Welcome to Skydive Orange!</p>
+            <p class="welcomeTitle">Welcome to Skydive Orange</p>
         </div>
 
 

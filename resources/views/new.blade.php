@@ -69,7 +69,7 @@
 
                                 <label for="customerPhoneNum">Phone Number</label>
                                 <input type="customerPhoneNum" class="form-control mb-3" id="customerPhoneNum"
-                                    name="customerPhoneNum" required placeholder="###-###-####">
+                                    name="customerPhoneNum" required placeholder="###-###-####" maxlength = 12 minlength = 10> 
                             </div>
                             <div class="col-md-6 mt-4">
 
@@ -88,7 +88,7 @@
 
                             <div class="form-group col-md-6">
                                 <label class="mr-2" for="customerJumpDate">Date of Skydive</label>
-                                <input type="date" class="form-control" id="customerJumpDate" name="customerJumpDate">
+                                <input type="date" value = "<?php echo date('Y-m-d') ?>" class="form-control" id="customerJumpDate" name="customerJumpDate">
                             </div>
 
                         </div>
@@ -233,6 +233,7 @@
     </div>
 
     <script src="{{ asset('js/clear-radios.js') }}" defer ></script>
+    <script src="{{ asset('js/phoneNumValidate.js') }}" defer ></script>
 
     @include('layout.partials.footer-scripts')
 

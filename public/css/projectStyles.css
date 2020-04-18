@@ -302,6 +302,28 @@ legend.mediaFormat-border{
     font-size: 50px;
     
   }
+
+.landingImg {
+    /* Landing image */
+    background-image: url("/images/landingImg.jpg");
+    
+    /* Full-screen */
+    height: 100%;
+    /* Center the background image */
+    background-position: center;
+    /* Scale and zoom in the image */
+    background-size: cover;
+    /* Add position: relative to enable absolutely positioned elements inside the image (place text) */
+    position: relative;
+    /* Add a white text color to all elements inside the .bgimg container */
+    /*color: white;*/
+    /* Add a font */
+    font-family: "Courier, arial, helvetica";
+    /* Set the font-size to 25 pixels */
+    font-size: 50px;
+    
+  }
+
   /*Darken the background-image*/
   .blankarea {
  /*   position: absolute;

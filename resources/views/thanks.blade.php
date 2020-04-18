@@ -10,7 +10,7 @@
 <body>
     @include('layout.partials.nav')
     <!--Added todayEnd of today's addition-->
-    <div class="bgimg">
+    <div class="landingImg">
         <div class="title bg-black text-center">
             <p class="welcomeTitle">Thank you for your submission!</p>
         </div>

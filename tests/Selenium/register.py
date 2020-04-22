@@ -15,11 +15,11 @@ class VideoTest(unittest.TestCase):
     def test_login_valid(self):
         self.driver.get("http://ec2-54-172-128-139.compute-1.amazonaws.com/query")
         self.driver.find_element_by_link_text("Register").click()
-        self.driver.find_element_by_id("name").send_keys("Eric George")
-        self.driver.find_element_by_name("email").send_keys("eric@gmail.com")
-        self.driver.find_element_by_id("password").send_keys("12345678")
-        self.driver.find_element_by_id("password-confirm").send_keys("12345678")
-        time.sleep(10)
+        self.driver.find_element_by_id("name").send_keys("Danny Smith")
+        self.driver.find_element_by_name("email").send_keys("dsmith@gmail.com")
+        self.driver.find_element_by_id("password").send_keys("123456789")
+        self.driver.find_element_by_id("password-confirm").send_keys("123456789")
+        time.sleep(5)
         self.driver.find_element_by_css_selector(".btn-primary").click()
         time.sleep(8)
 
@@ -27,6 +27,9 @@ class VideoTest(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        cls.driver.close()
-        cls.driver.quit()
+
         print("Test Completed")
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -14,17 +14,17 @@ class LoginVideoTest(unittest.TestCase):
 
     def test_login_valid(self):
         self.driver.get("http://ec2-54-172-128-139.compute-1.amazonaws.com/query")
-        self.driver.find_element_by_name("email").send_keys("eric@gmail.com")
-        self.driver.find_element_by_id("password").send_keys("12345678")
+        self.driver.find_element_by_name("email").send_keys("dsmith@gmail.com")
+        self.driver.find_element_by_id("password").send_keys("123456789")
         time.sleep(5)
         self.driver.find_element_by_id("remember").click()
         self.driver.find_element_by_css_selector(".btn-primary").click()
-        self.driver.find_element_by_name("customerFirstName").send_keys("New")
-        self.driver.find_element_by_name("customerLastName").send_keys("Member")
-        self.driver.find_element_by_name("customerEmail1").send_keys("New@gmail.com")
-        self.driver.find_element_by_name("customerPhoneNum").send_keys("703-123-4567")
+        self.driver.find_element_by_name("customerFirstName").send_keys("Maria")
+        self.driver.find_element_by_name("customerLastName").send_keys("Wilson")
+        self.driver.find_element_by_name("customerEmail1").send_keys("mar@gmail.com")
+        self.driver.find_element_by_name("customerPhoneNum").send_keys("703-765-4325")
         self.driver.find_element_by_id("homePhoneType").click()
-        self.driver.find_element_by_name("customerJumpDate").send_keys("04/20/2020")
+        self.driver.find_element_by_name("customerJumpDate").send_keys("2020-04-24")
         self.driver.find_element_by_id("PhotosOnly").click()
         time.sleep(10)
         self.driver.find_element_by_css_selector(".btn-primary").click()
@@ -37,3 +37,7 @@ class LoginVideoTest(unittest.TestCase):
         cls.driver.close()
         cls.driver.quit()
         print("Test Completed")
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -61,7 +61,7 @@
             @include('layout.partials.mediatype-formfield')
             <br>
             @csrf
-            <button type="submit" class="btn btn-primary" formmethod="post">Submit</button>
+            <button type="submit" class="btn btn-primary" formmethod="post">Search</button>
             <button type="reset" class="btn btn-primary" value="Reset">Reset</button>
         </form>
 

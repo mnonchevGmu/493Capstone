@@ -42,14 +42,16 @@
                         <div class="form-group col-md-6">
                             <label class="mr-2" for="customerFirstName">First Name</label>
                             <input type="text" class="form_control col-md-8" id="customerFirstName"
-                                name="customerFirstName" minlength="2" required placeholder="First Name">
+                                name="customerFirstName" minlength="2" required placeholder="First Name"
+                                value="{{old('customerFirstName')}}">
                         </div>
 
                         <!--Get the customer's last name-->
                         <div class="form-group col-md-6">
                             <label class="mr-2" for="customerLastName">Last Name</label>
                             <input type="text" class="form_control col-md-8" id="customerLastName"
-                                name="customerLastName" minlength="2" required placeholder="Last Name">
+                                name="customerLastName" minlength="2" required placeholder="Last Name"
+                                value="{{old('customerLastName')}}">
                         </div>
                     </div>
 
@@ -58,10 +60,12 @@
                         <legend class="email-border">Contact Information</legend>
                         <label for="customerEmail1">Email Address</label>
                         <input type="email" class="form-control mb-3" id="customerEmail1" name="customerEmail1" required
-                            placeholder="email@domain.com">
+                            placeholder="email@domain.com"
+                            value="{{old('customerEmail1')}}">
                         <label for="customerEmail2">Re-type Email Address</label>
                         <input type="email" class="form-control " id="customerEmail2" name="customerEmail2" required
-                            placeholder="email@domain.com">
+                            placeholder="email@domain.com"
+                            value="{{old('customerEmail2')}}">
                         <small id="email2Tip" class="form-text text-muted ml-3">Both email addresses must
                             match</small>
                         <div class="row">
@@ -69,7 +73,9 @@
 
                                 <label for="customerPhoneNum">Phone Number</label>
                                 <input type="customerPhoneNum" class="form-control mb-3" id="customerPhoneNum"
-                                    name="customerPhoneNum" required placeholder="###-###-####">
+                                    name="customerPhoneNum" required placeholder="###-###-####" 
+                                    maxlength = 12 minlength = 10
+                                    value="{{old('customerPhoneNum')}}"> 
                             </div>
                             <div class="col-md-6 mt-4">
 
@@ -88,7 +94,9 @@
 
                             <div class="form-group col-md-6">
                                 <label class="mr-2" for="customerJumpDate">Date of Skydive</label>
-                                <input type="date" class="form-control" id="customerJumpDate" name="customerJumpDate">
+                                <input type="date" value = "<?php echo date('Y-m-d') ?>" 
+                                class="form-control" id="customerJumpDate" name="customerJumpDate"
+                                value="{{old('customerJumpDate')}}">
                             </div>
 
                         </div>
@@ -233,6 +241,7 @@
     </div>
 
     <script src="{{ asset('js/clear-radios.js') }}" defer ></script>
+    <script src="{{ asset('js/phoneNumValidate.js') }}" defer ></script>
 
     @include('layout.partials.footer-scripts')
 
